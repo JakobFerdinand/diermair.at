@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Under Construction</title>
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚧</text></svg>">
+
+    <script>
+        const theme = localStorage.getItem('theme');
+        if (theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        }
+        
+        function toggleTheme() {
+            const isDarkMode = document.documentElement.classList.toggle('dark');
+            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+        }
+    </script>
+</head>
+
+<body class="flex justify-center items-center min-h-screen m-4 font-sans bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 transition-colors duration-300">
+    <button
+        class="absolute top-7 right-7 bg-gray-800 dark:bg-gray-500 p-2 rounded-lg"
+        onclick="toggleTheme()">
+        <span class="block dark:hidden">🌙</span>
+        <span class="hidden dark:block">☀️</span>
+    </button>
+
+    <div class="text-center">
+        <h1 class="text-4xl mb-10">🚧👷‍♀️🏗️</h1>
+        <h1 class="text-3xl font-bold mb-3">Website Under Construction</h1>
+        <p>Our website is currently under development. Please check back soon for updates!</p>
+    </div>
+</body>
+
+</html>
