@@ -1,23 +1,16 @@
 {
-  "name": "diermair.at",
-  "version": "1.0.0",
-  "description": "[The homepage](https://diermair.at) of Paul Diermair.",
-  "main": "index.js",
+  "name": "diermair-site",
+  "type": "module",
+  "version": "0.0.1",
   "scripts": {
-    "dev:css": "npx @tailwindcss/cli -i ./src/app.src.css -o ./dist/css/app.css --watch",
-    "build:css": "npx @tailwindcss/cli -i ./src/app.src.css -o ./dist/css/app.css --minify"
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jakobferdinand/diermair.at.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/jakobferdinand/diermair.at/issues"
-  },
-  "homepage": "https://github.com/jakobferdinand/diermair.at#readme",
   "dependencies": {
-    "@tailwindcss/cli": "^4.0.6"
+    "@tailwindcss/vite": "^4.1.4",
+    "astro": "^5.7.5",
+    "tailwindcss": "^4.1.4"
   }
 }
