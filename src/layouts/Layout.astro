@@ -9,13 +9,43 @@ const { title } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="de">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
+		<title>{title} | Forstbewirtschaftung Diermair</title>
+		
+		<!-- SEO Meta Tags -->
+		<meta name="description" content="Professionelle Forstbewirtschaftung und Waldpflege in Österreich. Nachhaltige Forstwirtschaft, Holzernte und Waldmanagement von Experten." />
+		<meta name="keywords" content="Forstwirtschaft, Waldpflege, Forstbewirtschaftung, Holzernte, nachhaltiger Wald, Österreich, Waldmanagement" />
+		<meta name="author" content="Forstbewirtschaftung Diermair" />
+		
+		<!-- Open Graph / Social Media -->
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={`${title} | Forstbewirtschaftung Diermair`} />
+		<meta property="og:description" content="Professionelle Forstbewirtschaftung und Waldpflege in Österreich. Nachhaltige Forstwirtschaft, Holzernte und Waldmanagement von Experten." />
+		<meta property="og:site_name" content="Forstbewirtschaftung Diermair" />
+		
+		<!-- Structured Data -->
+		<script type="application/ld+json">
+			{
+				"@context": "https://schema.org",
+				"@type": "LocalBusiness",
+				"name": "Forstbewirtschaftung Diermair",
+				"description": "Professionelle Forstbewirtschaftung und Waldpflege in Österreich",
+				"image": "/favicon.svg",
+				"address": {
+					"@type": "PostalAddress",
+					"addressCountry": "AT",
+					"addressRegion": "Oberösterreich"
+				},
+				"areaServed": "Oberösterreich",
+				"serviceType": ["Forstbewirtschaftung", "Waldpflege", "Holzernte"],
+				"priceRange": "€€"
+			}
+		</script>
 	</head>
 	<body
 		class="flex justify-center items-center min-h-screen m-4 font-sans fill-green-900 text-green-900 dark:fill-gray-200 dark:text-gray-200 bg-gray-200 dark:bg-green-900 transition-colors duration-300"
