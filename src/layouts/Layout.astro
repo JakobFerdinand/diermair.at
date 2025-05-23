@@ -73,19 +73,18 @@ const { title } = Astro.props;
 
 <script>
 	const theme = localStorage.getItem("theme");
-	if (
-		theme === "dark" ||
-		(!("theme" in localStorage) &&
-			window.matchMedia("(prefers-color-scheme: dark)").matches)
-	) {
-		document.documentElement.classList.add("dark");
-	}
+        if (
+                theme === "dark" ||
+                (localStorage.getItem("theme") === null &&
+                        window.matchMedia("(prefers-color-scheme: dark)").matches)
+        ) {
+                document.documentElement.classList.add("dark");
+        }
 
-	function toggleTheme() {
-		console.log("Toggling theme");
-		const isDarkMode = document.documentElement.classList.toggle("dark");
-		localStorage.setItem("theme", isDarkMode ? "dark" : "light");
-	}
+        function toggleTheme() {
+                const isDarkMode = document.documentElement.classList.toggle("dark");
+                localStorage.setItem("theme", isDarkMode ? "dark" : "light");
+        }
 
 	const buttons = document.querySelectorAll("[toggle-mode-button]");
 	buttons.forEach((button) => {
