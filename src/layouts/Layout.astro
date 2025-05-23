@@ -50,36 +50,34 @@ const { title } = Astro.props;
 	<body
 		class="flex justify-center items-center min-h-screen m-4 font-sans fill-green-900 text-green-900 dark:fill-gray-200 dark:text-gray-200 bg-gray-200 dark:bg-green-900 transition-colors duration-300"
 	>
-		<button
-			class="absolute top-7 right-7 bg-gray-800 dark:bg-gray-500 p-2 rounded-lg"
-			toggle-mode-button
-		>
+                <button
+                        class="absolute top-7 right-7 bg-gray-800 dark:bg-gray-500 p-2 rounded-lg"
+                        toggle-mode-button
+                        aria-label="Toggle theme"
+                >
 			<span class="block dark:hidden">🌙</span>
 			<span class="hidden dark:block">☀️</span>
 		</button>
 
-		<slot />
-	</body>
-</html>
+                <slot />
+                <style>
+                        html,
+                        body {
+                                margin: 0;
+                                width: 100%;
+                                height: 100%;
+                        }
+                </style>
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
-
-<script>
-	const theme = localStorage.getItem("theme");
-	if (
-		theme === "dark" ||
-		(!("theme" in localStorage) &&
-			window.matchMedia("(prefers-color-scheme: dark)").matches)
-	) {
-		document.documentElement.classList.add("dark");
-	}
+                <script>
+                        const theme = localStorage.getItem("theme");
+                        if (
+                                theme === "dark" ||
+                                (!("theme" in localStorage) &&
+                                        window.matchMedia("(prefers-color-scheme: dark)").matches)
+                        ) {
+                                document.documentElement.classList.add("dark");
+                        }
 
 	function toggleTheme() {
 		console.log("Toggling theme");
@@ -89,6 +87,8 @@ const { title } = Astro.props;
 
 	const buttons = document.querySelectorAll("[toggle-mode-button]");
 	buttons.forEach((button) => {
-		button.addEventListener("click", toggleTheme);
-	});
-</script>
+                button.addEventListener("click", toggleTheme);
+        });
+                </script>
+        </body>
+</html>
