@@ -2,7 +2,7 @@
 import "../styles/global.css";
 
 interface Props {
-	title: string;
+  title: string;
 }
 
 const { title } = Astro.props;
@@ -10,84 +10,45 @@ const { title } = Astro.props;
 
 <!doctype html>
 <html lang="de">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title} | Forstbewirtschaftung Diermair</title>
-		
-		<!-- SEO Meta Tags -->
-		<meta name="description" content="Professionelle Forstbewirtschaftung und Waldpflege in Österreich. Nachhaltige Forstwirtschaft, Holzernte und Waldmanagement von Experten." />
-		<meta name="keywords" content="Forstwirtschaft, Waldpflege, Forstbewirtschaftung, Holzernte, nachhaltiger Wald, Österreich, Waldmanagement" />
-		<meta name="author" content="Forstbewirtschaftung Diermair" />
-		
-		<!-- Open Graph / Social Media -->
-		<meta property="og:type" content="website" />
-		<meta property="og:title" content={`${title} | Forstbewirtschaftung Diermair`} />
-		<meta property="og:description" content="Professionelle Forstbewirtschaftung und Waldpflege in Österreich. Nachhaltige Forstwirtschaft, Holzernte und Waldmanagement von Experten." />
-		<meta property="og:site_name" content="Forstbewirtschaftung Diermair" />
-		
-		<!-- Structured Data -->
-		<script type="application/ld+json">
-			{
-				"@context": "https://schema.org",
-				"@type": "LocalBusiness",
-				"name": "Forstbewirtschaftung Diermair",
-				"description": "Professionelle Forstbewirtschaftung und Waldpflege in Österreich",
-				"image": "/favicon.svg",
-				"address": {
-					"@type": "PostalAddress",
-					"addressCountry": "AT",
-					"addressRegion": "Oberösterreich"
-				},
-				"areaServed": "Oberösterreich",
-				"serviceType": ["Forstbewirtschaftung", "Waldpflege", "Holzernte"],
-				"priceRange": "€€"
-			}
-		</script>
-	</head>
-	<body
-		class="flex justify-center items-center min-h-screen m-4 font-sans fill-green-900 text-green-900 dark:fill-gray-200 dark:text-gray-200 bg-gray-200 dark:bg-green-900 transition-colors duration-300"
-	>
-		<button
-			class="absolute top-7 right-7 bg-gray-800 dark:bg-gray-500 p-2 rounded-lg"
-			toggle-mode-button
-		>
-			<span class="block dark:hidden">🌙</span>
-			<span class="hidden dark:block">☀️</span>
-		</button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title} | Paul Diermair Waldbewirtschaftung</title>
 
-		<slot />
-	</body>
+    <!-- SEO Meta Tags -->
+    <meta
+      name="description"
+      content="Professionelle Forstwirtschaft und Waldpflege in Oberösterreich. Nachhaltige Bewirtschaftung und persönliche Beratung."
+    />
+    <meta name="keywords" content="Forstwirtschaft, Waldpflege, Aufforstung, Beratung" />
+    <meta name="author" content="Paul Diermair" />
+  </head>
+  <body class="font-sans text-green-900 bg-white">
+    <header class="bg-green-800 text-white">
+      <div class="max-w-5xl mx-auto flex justify-between items-center p-4">
+        <p class="font-semibold">Paul Diermair Waldbewirtschaftung</p>
+        <nav class="space-x-4">
+          <a href="#leistungen" class="hover:underline">Leistungen</a>
+          <a href="#kontakt" class="hover:underline">Kontakt</a>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="bg-green-800 text-white text-center text-sm py-4">
+      &copy; {new Date().getFullYear()} Paul Diermair Waldbewirtschaftung
+    </footer>
+  </body>
 </html>
 
 <style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
 </style>
-
-<script>
-	const theme = localStorage.getItem("theme");
-        if (
-                theme === "dark" ||
-                (localStorage.getItem("theme") === null &&
-                        window.matchMedia("(prefers-color-scheme: dark)").matches)
-        ) {
-                document.documentElement.classList.add("dark");
-        }
-
-        function toggleTheme() {
-                const isDarkMode = document.documentElement.classList.toggle("dark");
-                localStorage.setItem("theme", isDarkMode ? "dark" : "light");
-        }
-
-	const buttons = document.querySelectorAll("[toggle-mode-button]");
-	buttons.forEach((button) => {
-		button.addEventListener("click", toggleTheme);
-	});
-</script>
