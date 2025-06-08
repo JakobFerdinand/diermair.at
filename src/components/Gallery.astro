@@ -26,24 +26,66 @@ const galleryImages = [
   },
 ];
 
-// Duplicate the images so the animation can loop seamlessly
-const scrollingImages = [...galleryImages, ...galleryImages];
 ---
 <section id="gallery" class="overflow-hidden py-8 w-screen -mx-4">
-  <div class="flex gap-4 animate-gallery-scroll">
-    {scrollingImages.map(({ src, alt }) => (
-      <img src={src} alt={alt} class="h-40 w-auto flex-shrink-0" />
+  <div
+    class="flex gap-4 overflow-x-auto cursor-grab"
+    data-scroll-container
+  >
+    {galleryImages.map(({ src, alt }) => (
+      <img
+        src={src}
+        alt={alt}
+        class="h-40 w-auto flex-shrink-0 select-none pointer-events-none"
+      />
     ))}
   </div>
 </section>
 
 <style>
-@keyframes gallery-scroll {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-.animate-gallery-scroll {
+[data-scroll-container] {
   width: max-content;
-  animation: gallery-scroll 30s linear infinite;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+[data-scroll-container]::-webkit-scrollbar {
+  display: none;
+}
+[data-scroll-container].dragging {
+  cursor: grabbing;
 }
 </style>
+
+<script>
+  const container = document.querySelector('[data-scroll-container]');
+  let isDown = false;
+  let startX;
+  let scrollLeft;
+
+  function startDrag(evt) {
+    isDown = true;
+    container.classList.add('dragging');
+    startX = evt.touches ? evt.touches[0].pageX : evt.pageX;
+    scrollLeft = container.scrollLeft;
+  }
+
+  function stopDrag() {
+    isDown = false;
+    container.classList.remove('dragging');
+  }
+
+  function drag(evt) {
+    if (!isDown) return;
+    const x = evt.touches ? evt.touches[0].pageX : evt.pageX;
+    const walk = startX - x;
+    container.scrollLeft = scrollLeft + walk;
+  }
+
+  container.addEventListener('mousedown', startDrag);
+  container.addEventListener('touchstart', startDrag);
+  window.addEventListener('mouseup', stopDrag);
+  container.addEventListener('mouseleave', stopDrag);
+  container.addEventListener('touchend', stopDrag);
+  container.addEventListener('mousemove', drag);
+  container.addEventListener('touchmove', drag);
+</script>
