@@ -1,10 +1,26 @@
 ---
 import Logo from './Logo.astro';
 ---
-<section id="hero">
+<section id="hero" class="center-section">
     <div class="hero-logo">
         <Logo />
     </div>
     <h1 class="hero-title">Paul Diermair</h1>
     <h1 class="hero-subtitle">Forstwart & Forstwirtschaftsmeister</h1>
 </section>
+
+<style>
+  .hero-logo {
+    margin-top: 2.5rem;
+  }
+
+  .hero-title {
+    font-size: 2.25rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+  }
+</style>
