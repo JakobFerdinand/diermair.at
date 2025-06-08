@@ -29,21 +29,10 @@ const galleryImages = [
 // Duplicate the images so the animation can loop seamlessly
 const scrollingImages = [...galleryImages, ...galleryImages];
 ---
-<section id="gallery" class="overflow-hidden py-8 w-screen -mx-4">
-  <div class="flex gap-4 animate-gallery-scroll">
+<section id="gallery">
+  <div class="gallery-images">
     {scrollingImages.map(({ src, alt }) => (
-      <img src={src} alt={alt} class="h-40 w-auto flex-shrink-0" />
+      <img src={src} alt={alt} />
     ))}
   </div>
 </section>
-
-<style>
-@keyframes gallery-scroll {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-.animate-gallery-scroll {
-  width: max-content;
-  animation: gallery-scroll 30s linear infinite;
-}
-</style>
