@@ -1,0 +1,23 @@
+---
+---
+<section id="gallery" class="overflow-hidden py-8">
+  <div class="flex gap-4 animate-gallery-scroll">
+    <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=800&q=80" alt="Wald im Sonnenlicht" class="h-40 w-auto" />
+    <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=800&q=80" alt="Forstarbeiter" class="h-40 w-auto" />
+    <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80" alt="Gefällter Baum" class="h-40 w-auto" />
+    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Baumschnitt" class="h-40 w-auto" />
+    <img src="https://images.unsplash.com/photo-1493246318656-5a8d2a4e1e0e?auto=format&fit=crop&w=800&q=80" alt="Holzstapel" class="h-40 w-auto" />
+    <img src="https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=800&q=80" alt="Waldweg" class="h-40 w-auto" />
+  </div>
+</section>
+
+<style>
+@keyframes gallery-scroll {
+  from { transform: translateX(100%); }
+  to { transform: translateX(-100%); }
+}
+.animate-gallery-scroll {
+  width: max-content;
+  animation: gallery-scroll 30s linear infinite;
+}
+</style>
