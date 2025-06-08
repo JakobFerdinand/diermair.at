@@ -1,6 +1,7 @@
 ---
+const { class: className = "" } = Astro.props;
 ---
-<footer class="w-full text-center py-4">
+<footer class={`w-full text-center py-4 ${className}`.trim()}>
     <a href="/impressum">Impressum</a>
 </footer>
 
