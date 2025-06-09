@@ -2,9 +2,20 @@
 const { class: className = "" } = Astro.props;
 ---
 <nav class={`navbar ${className}`.trim()}>
-  <ul>
-    <li><a href="#hero">Start</a></li>
+  <a href="#hero" class="nav-home">Start</a>
+  <button id="nav-toggle" class="nav-toggle" aria-expanded="false" aria-label="Menü öffnen">&#9776;</button>
+  <ul class="nav-links">
     <li><a href="#gallery">Fotos</a></li>
     <li><a href="#contact">Kontakt</a></li>
   </ul>
 </nav>
+
+<script>
+  const toggle = document.getElementById('nav-toggle');
+  const nav = toggle?.closest('.navbar');
+  toggle?.addEventListener('click', () => {
+    nav?.classList.toggle('open');
+    const isOpen = nav?.classList.contains('open');
+    toggle.setAttribute('aria-expanded', isOpen);
+  });
+</script>
