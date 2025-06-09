@@ -44,6 +44,7 @@ body {
   margin-top: 0.5rem;
   width: 100%;
   max-width: 20rem;
+  box-sizing: border-box;
 }
 
 .contact-card a {
@@ -141,7 +142,7 @@ body {
   width: 100%;
   margin-top: 1rem;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
   gap: 1rem;
 }
 
@@ -153,6 +154,7 @@ body {
   text-align: center;
   width: 100%;
   max-width: 20rem;
+  box-sizing: border-box;
 }
 
 .navbar {
