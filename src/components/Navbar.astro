@@ -1,0 +1,10 @@
+---
+const { class: className = "" } = Astro.props;
+---
+<nav class={`navbar ${className}`.trim()}>
+  <ul>
+    <li><a href="#hero">Start</a></li>
+    <li><a href="#gallery">Fotos</a></li>
+    <li><a href="#contact">Kontakt</a></li>
+  </ul>
+</nav>
