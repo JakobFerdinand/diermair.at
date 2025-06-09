@@ -111,6 +111,10 @@ body {
   padding: 1rem 0;
 }
 
+.footer-spacing {
+  margin-top: 2rem;
+}
+
 .margin-right-small {
   margin-right: 0.5rem;
 }
