@@ -30,4 +30,24 @@ import Logo from './Logo.astro';
       }
     });
   });
+
+  const logo = nav?.querySelector('.logo');
+  if (nav && logo) {
+    const fontSize = parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
+    const targetSize = 3.5 * fontSize;
+    const startSize = logo.offsetHeight;
+    const navExtraHeight = nav.offsetHeight - startSize;
+    nav.style.height = `${nav.offsetHeight}px`;
+
+    const updateSize = () => {
+      const scrollY = window.scrollY;
+      const newSize = Math.max(startSize - scrollY, targetSize);
+      logo.style.width = `${newSize}px`;
+      logo.style.height = `${newSize}px`;
+      nav.style.height = `${navExtraHeight + newSize}px`;
+    };
+
+    updateSize();
+    window.addEventListener('scroll', updateSize);
+  }
 </script>

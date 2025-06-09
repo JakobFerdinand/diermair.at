@@ -83,6 +83,10 @@ body {
   }
 }
 
+.navbar .logo {
+  margin-bottom: 0;
+}
+
 #gallery {
   overflow: hidden;
   padding: 2rem 0;
