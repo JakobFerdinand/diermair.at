@@ -10,3 +10,35 @@ import Contact from './Contact.astro';
         <Contact />
     </main>
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const navbar = document.querySelector('.navbar');
+    const navLogoLink = document.querySelector('.nav-logo-link');
+    const heroLogo = document.querySelector('#hero .hero-logo');
+    if (!navbar || !heroLogo || !navLogoLink) return;
+
+    const heroRect = heroLogo.getBoundingClientRect();
+    const navRect = navLogoLink.getBoundingClientRect();
+
+    const deltaX = navRect.left - heroRect.left;
+    const deltaY = navRect.top - heroRect.top;
+    const endScale = navRect.width / heroRect.width;
+
+    function update() {
+      const progress = Math.min(window.scrollY / heroRect.height, 1);
+      heroLogo.style.setProperty('--logo-x', `${deltaX * progress}px`);
+      heroLogo.style.setProperty('--logo-y', `${deltaY * progress}px`);
+      heroLogo.style.setProperty('--logo-scale', 1 - progress * (1 - endScale));
+      if (progress >= 1) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    }
+
+    update();
+    window.addEventListener('scroll', update);
+    window.addEventListener('resize', update);
+  });
+</script>

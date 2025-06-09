@@ -1,8 +1,11 @@
 ---
+import Logo from './Logo.astro';
 const { class: className = "" } = Astro.props;
 ---
 <nav class={`navbar ${className}`.trim()}>
-  <a href="#hero" class="nav-home">Start</a>
+  <a href="/" class="nav-logo-link" aria-label="Start">
+    <Logo class="nav-logo" />
+  </a>
   <button id="nav-toggle" class="nav-toggle" aria-expanded="false" aria-label="Menü öffnen">&#9776;</button>
   <ul class="nav-links">
     <li><a href="#gallery">Fotos</a></li>

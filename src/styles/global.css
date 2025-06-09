@@ -49,7 +49,13 @@ body {
 }
 
 .hero-logo {
+  position: sticky;
+  top: 2.5rem;
   margin-top: 2.5rem;
+  z-index: 5;
+  transform-origin: top center;
+  transform: translate(var(--logo-x, 0), var(--logo-y, 0)) scale(var(--logo-scale, 1));
+  transition: transform 0.2s linear;
 }
 
 .hero-title {
@@ -129,11 +135,22 @@ body {
   align-items: center;
 }
 
-.nav-home {
+.nav-logo-link {
+  display: block;
   margin-right: auto;
-  color: var(--green-color);
-  text-decoration: none;
-  font-weight: bold;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+.navbar.scrolled .nav-logo-link {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.nav-logo {
+  width: 3rem;
+  height: 3rem;
 }
 
 .nav-links {
