@@ -155,10 +155,10 @@ body {
 }
 
 .nav-home {
-  margin-right: auto;
-  color: var(--green-color);
+  flex: 1;
+  display: flex;
+  justify-content: center;
   text-decoration: none;
-  font-weight: bold;
 }
 
 .nav-links {
@@ -166,6 +166,7 @@ body {
   display: flex;
   gap: 1rem;
   margin: 0;
+  margin-left: auto;
   padding: 0;
 }
 
