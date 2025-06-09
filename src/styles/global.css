@@ -43,6 +43,12 @@ body {
   margin-top: 0.5rem;
 }
 
+@media (max-width: 639px) {
+  .contact-card {
+    width: 100%;
+  }
+}
+
 .contact-card a {
   color: var(--green-color);
   text-decoration: none;
