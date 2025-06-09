@@ -97,3 +97,7 @@ body {
 .margin-right-small {
   margin-right: 0.5rem;
 }
+
+.text-left {
+  text-align: left;
+}
