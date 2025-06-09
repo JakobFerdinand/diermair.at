@@ -34,6 +34,20 @@ body {
   align-items: center;
 }
 
+.contact-card {
+  background-color: #fff;
+  padding: 1rem 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+.contact-card a {
+  color: var(--green-color);
+  text-decoration: none;
+}
+
 .hero-logo {
   margin-top: 2.5rem;
 }
