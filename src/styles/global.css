@@ -28,6 +28,7 @@ body {
 }
 
 #hero,
+#leistungen,
 #contact {
   display: flex;
   flex-direction: column;
@@ -116,6 +117,11 @@ body {
 
 .text-left {
   text-align: left;
+}
+
+.leistungen-list {
+  list-style: disc;
+  padding-left: 1rem;
 }
 
 .navbar {
