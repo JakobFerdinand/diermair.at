@@ -20,27 +20,32 @@ import Contact from './Contact.astro';
     const heroLogo = document.querySelector('#hero .hero-logo');
     if (!navbar || !heroLogo || !navLogoLink) return;
 
-    const heroRect = heroLogo.getBoundingClientRect();
-    const navRect = navLogoLink.getBoundingClientRect();
+    let heroRect = heroLogo.getBoundingClientRect();
+    let navRect = navLogoLink.getBoundingClientRect();
 
-    const deltaX = navRect.left - heroRect.left;
-    const deltaY = navRect.top - heroRect.top;
-    const endScale = navRect.width / heroRect.width;
+    function computeRects() {
+      heroRect = heroLogo.getBoundingClientRect();
+      navRect = navLogoLink.getBoundingClientRect();
+    }
 
     function update() {
+      const deltaX = navRect.left - heroRect.left;
+      const deltaY = navRect.top - heroRect.top;
+      const endScale = navRect.width / heroRect.width;
       const progress = Math.min(window.scrollY / heroRect.height, 1);
       heroLogo.style.setProperty('--logo-x', `${deltaX * progress}px`);
       heroLogo.style.setProperty('--logo-y', `${deltaY * progress}px`);
       heroLogo.style.setProperty('--logo-scale', 1 - progress * (1 - endScale));
-      if (progress >= 1) {
-        navbar.classList.add('scrolled');
-      } else {
-        navbar.classList.remove('scrolled');
-      }
+      heroLogo.style.setProperty('--hero-logo-opacity', 1 - progress);
+      navLogoLink.style.setProperty('--nav-logo-opacity', progress);
+      navbar.classList.toggle('scrolled', progress >= 1);
     }
 
     update();
     window.addEventListener('scroll', update);
-    window.addEventListener('resize', update);
+    window.addEventListener('resize', () => {
+      computeRects();
+      update();
+    });
   });
 </script>
