@@ -18,4 +18,14 @@ const { class: className = "" } = Astro.props;
     const isOpen = nav?.classList.contains('open');
     toggle.setAttribute('aria-expanded', isOpen);
   });
+
+  // Close mobile navigation when a link is clicked
+  document.querySelectorAll('.nav-links a').forEach((link) => {
+    link.addEventListener('click', () => {
+      if (nav?.classList.contains('open')) {
+        nav.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
 </script>
