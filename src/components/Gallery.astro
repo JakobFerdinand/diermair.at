@@ -29,6 +29,34 @@ const galleryImages = [
 // Duplicate the images so the animation can loop seamlessly
 const scrollingImages = [...galleryImages, ...galleryImages];
 ---
+<style>
+  #gallery {
+    overflow: hidden;
+    padding: 2rem 0;
+    width: 100vw;
+    margin-left: -1rem;
+    margin-right: -1rem;
+  }
+
+  .gallery-images {
+    display: flex;
+    gap: 1rem;
+    width: max-content;
+    animation: gallery-scroll 30s linear infinite;
+  }
+
+  .gallery-images img {
+    height: 10rem;
+    width: auto;
+    flex-shrink: 0;
+  }
+
+  @keyframes gallery-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+</style>
+
 <section id="gallery">
   <div class="gallery-images">
     {scrollingImages.map(({ src, alt }) => (

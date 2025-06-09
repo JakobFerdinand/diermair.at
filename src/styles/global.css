@@ -26,49 +26,6 @@ body {
   margin-top: auto;
 }
 
-#hero,
-#leistungen,
-#contact {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.contact-card {
-  background-color: #fff;
-  padding: 1rem;
-  border-radius: 0.5rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  text-align: center;
-}
-
-@media (max-width: 639px) {
-  .contact-card {
-    width: 100%;
-  }
-}
-
-.contact-card a {
-  color: var(--green-color);
-  text-decoration: none;
-}
-
-.hero-logo {
-  margin-top: 2.5rem;
-}
-
-.hero-title {
-  font-size: 2.25rem;
-  margin-bottom: 0.75rem;
-}
-
-.hero-subtitle {
-  font-size: clamp(1rem, 5vw, 1.5rem);
-  margin-bottom: 2rem;
-  white-space: nowrap;
-  padding: 0 0.5rem;
-}
-
 .logo {
   display: block;
   width: 13rem;
@@ -83,75 +40,10 @@ body {
   }
 }
 
-#gallery {
-  overflow: hidden;
-  padding: 2rem 0;
-  width: 100vw;
-  margin-left: -1rem;
-  margin-right: -1rem;
-}
-
-.gallery-images {
-  display: flex;
-  gap: 1rem;
-  width: max-content;
-  animation: gallery-scroll 30s linear infinite;
-}
-
-.gallery-images img {
-  height: 10rem;
-  width: auto;
-  flex-shrink: 0;
-}
-
-@keyframes gallery-scroll {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-
-.footer {
-  width: 100%;
-  text-align: center;
-  padding: 1rem 0;
-}
-
-.footer-spacing {
-  margin-top: 2rem;
-}
-
 .margin-right-small {
   margin-right: 0.5rem;
 }
 
 .text-left {
   text-align: left;
-}
-
-.leistungen-list {
-  list-style: disc;
-  padding-left: 1rem;
-}
-
-#leistungen .leistungen-grid {
-  width: 100%;
-  margin-top: 1rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-  gap: 1rem;
-}
-
-#contact .contact-grid {
-  width: 100%;
-  margin-top: 1rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-  gap: 1rem;
-}
-
-.leistung-card {
-  background-color: #fff;
-  padding: 1rem;
-  border-radius: 0.5rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  text-align: center;
 }

@@ -1,6 +1,30 @@
 ---
 import Logo from './Logo.astro';
 ---
+<style>
+  #hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-logo {
+    margin-top: 2.5rem;
+  }
+
+  .hero-title {
+    font-size: 2.25rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1rem, 5vw, 1.5rem);
+    margin-bottom: 2rem;
+    white-space: nowrap;
+    padding: 0 0.5rem;
+  }
+</style>
+
 <section id="hero">
     <div class="hero-logo">
         <Logo />
