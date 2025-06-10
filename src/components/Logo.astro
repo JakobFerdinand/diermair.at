@@ -1,13 +1,13 @@
 ---
-
+const { size = "200mm" } = Astro.props;
 ---
 
 <svg
 	class="logo"
 	xmlns="http://www.w3.org/2000/svg"
 	xml:space="preserve"
-	width="200mm"
-	height="200mm"
+	width={size}
+	height={size}
 	version="1.1"
 	style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
 	viewBox="0 0 20000 20000"
@@ -344,16 +344,8 @@
 <style>
 .logo {
   display: block;
-  width: 13rem;
-  height: 13rem;
   margin-bottom: 2.5rem;
 }
 
-@media (min-width: 640px) {
-  .logo {
-    width: 20rem;
-    height: 20rem;
-  }
-}
 
 </style>
