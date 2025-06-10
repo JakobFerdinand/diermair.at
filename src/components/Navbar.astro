@@ -49,6 +49,7 @@ import Logo from './Logo.astro';
 
   .nav-home {
     display: flex;
+    align-items: center;
     text-decoration: none;
   }
 
@@ -69,6 +70,9 @@ import Logo from './Logo.astro';
 
   .nav-toggle {
     display: none;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
     background: none;
     border: none;
     font-size: 1.5rem;
@@ -92,7 +96,8 @@ import Logo from './Logo.astro';
     }
 
     .nav-toggle {
-      display: block;
+      display: flex;
+      align-items: center;
       margin-left: auto;
     }
   }
