@@ -1,3 +1,8 @@
+---
+import { Image } from 'astro:assets';
+import HolzernteIcon from '../Images/holzernte.svg';
+---
+
 <section id="leistungen">
     <h2>Leistungen</h2>
     <div class="leistungen-grid">
@@ -9,9 +14,7 @@
             <p>Individuelle Beratung für eine nachhaltige Waldbewirtschaftung.</p>
         </div>
         <div class="leistung-card">
-            <svg width="40" height="40" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M2 11h8v2H2z M10 9h4v6h-4z M14 11h6v2h-6z M20 10h2v4h-2z" />
-            </svg>
+            <Image src={HolzernteIcon} alt="" width={40} height={40} />
             <h3>Holzernte</h3>
             <p>Effiziente und schonende Holzernte mit moderner Technik.</p>
         </div>
