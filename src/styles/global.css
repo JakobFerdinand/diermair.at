@@ -12,14 +12,13 @@ body {
 body {
   display: flex;
   flex-direction: column;
-  align-items: center;
   min-height: 100vh;
-  margin: 1rem;
+  padding: 1rem;
+  box-sizing: border-box;
   font-family: sans-serif;
   color: var(--green-color);
   background-color: var(--gray-bg);
   fill: var(--green-color);
-  transition: background-color 0.3s, color 0.3s;
 }
 
 .mt-auto {

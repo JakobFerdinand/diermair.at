@@ -14,7 +14,7 @@ const { title } = Astro.props;
 <html lang="de">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title} | Forstbewirtschaftung Diermair</title>
@@ -32,12 +32,12 @@ const { title } = Astro.props;
 		
 		<!-- Structured Data -->
 		<script type="application/ld+json">
-			{
+			const structuredData = {
 				"@context": "https://schema.org",
 				"@type": "LocalBusiness",
 				"name": "Forstbewirtschaftung Diermair",
 				"description": "Professionelle Forstbewirtschaftung und Waldpflege in Österreich",
-				"image": "/favicon.svg",
+				"image": "/favicon.svg", 
 				"address": {
 					"@type": "PostalAddress",
 					"addressCountry": "AT",
@@ -46,14 +46,26 @@ const { title } = Astro.props;
 				"areaServed": "Oberösterreich",
 				"serviceType": ["Forstbewirtschaftung", "Waldpflege", "Holzernte"],
 				"priceRange": "€€"
-			}
+			};
+			document.currentScript.textContent = JSON.stringify(structuredData);
 		</script>
 	</head>
        <body>
 
                <Navbar />
-               <slot />
+               <main class="main-content">
+                 <slot />
+               </main>
                <Footer class="mt-auto footer-spacing" />
        </body>
 </html>
+<style>
+	.main-content {
+		flex-grow: 1;
+		width: 100%;
+		max-width: 1280px; /* Example max-width, adjust as needed */
+		padding: 1rem;
+		margin: 0 auto;
+	}
+</style>
 

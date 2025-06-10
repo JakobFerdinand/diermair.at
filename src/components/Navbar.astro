@@ -13,20 +13,20 @@ import Logo from './Logo.astro';
 </nav>
 
 <script>
-  const toggle = document.getElementById('nav-toggle');
-  const nav = toggle?.closest('.navbar');
-  toggle?.addEventListener('click', () => {
-    nav?.classList.toggle('open');
-    const isOpen = nav?.classList.contains('open');
-    toggle.setAttribute('aria-expanded', isOpen);
+  const navToggle = document.getElementById('nav-toggle') as HTMLButtonElement | null;
+  const navbar = navToggle?.closest('.navbar') as HTMLElement | null;
+
+  navToggle?.addEventListener('click', () => {
+    const isOpen = navbar?.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', String(isOpen));
   });
 
   // Close mobile navigation when a link is clicked
   document.querySelectorAll('.nav-links a').forEach((link) => {
     link.addEventListener('click', () => {
-      if (nav?.classList.contains('open')) {
-        nav.classList.remove('open');
-        toggle.setAttribute('aria-expanded', 'false');
+      if (navbar?.classList.contains('open')) {
+        navbar.classList.remove('open');
+        navToggle?.setAttribute('aria-expanded', 'false');
       }
     });
   });
@@ -47,9 +47,7 @@ import Logo from './Logo.astro';
   }
 
   .nav-home {
-    flex: 1;
     display: flex;
-    justify-content: center;
     text-decoration: none;
   }
 
