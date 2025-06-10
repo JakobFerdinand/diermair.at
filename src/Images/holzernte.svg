@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="200" height="100"
+     viewBox="0 0 200 100">
+  <!-- Kettensägen-Gehäuse -->
+  <rect x="10" y="30" width="100" height="40"
+        fill="#666" stroke="#333" stroke-width="2"/>
+  <!-- Griff -->
+  <rect x="35" y="15" width="20" height="20"
+        fill="#333" stroke="#000" stroke-width="2"
+        rx="3" ry="3"/>
+  <!-- Kettenrad -->
+  <circle cx="150" cy="50" r="30"
+          fill="none" stroke="#333" stroke-width="4"/>
+  <!-- Zahnbesatz der Kette -->
+  <g stroke="#333" stroke-width="4">
+    <line x1="180" y1="50" x2="195" y2="50"/>
+    <line x1="155" y1="80" x2="163" y2="88"/>
+    <line x1="125" y1="80" x2="118" y2="88"/>
+    <line x1="118" y1="20" x2="125" y2="30"/>
+    <line x1="155" y1="20" x2="163" y2="12"/>
+  </g>
+</svg>
