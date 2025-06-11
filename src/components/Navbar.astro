@@ -1,9 +1,12 @@
 ---
 const { class: className = "" } = Astro.props;
-import Logo from './Logo.astro';
+import { Image } from 'astro:assets';
+import Logo from '../images/Logo.svg';
 ---
 <nav class={`navbar ${className}`.trim()}>
-  <a href="/" class="nav-home"><Logo size="4rem" /></a>
+  <a href="/" class="nav-home">
+     <Logo class="logo" />
+  </a>
   <button id="nav-toggle" class="nav-toggle" aria-expanded="false" aria-label="Menü öffnen">&#9776;</button>
   <ul class="nav-links">
     <li><a href="#gallery">Fotos</a></li>
@@ -33,6 +36,11 @@ import Logo from './Logo.astro';
 </script>
 
 <style>
+  .logo {
+    width: 50px;
+    height: auto;
+  }
+
   .navbar {
     position: fixed;
     top: 0;
@@ -101,4 +109,3 @@ import Logo from './Logo.astro';
       margin-left: auto;
     }
   }
-</style>
