@@ -1,0 +1,65 @@
+---
+const galleryImages = [
+  {
+    src: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=800&q=80",
+    alt: "Wald im Sonnenlicht",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=800&q=80",
+    alt: "Forstarbeiter",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80",
+    alt: "Gefällter Baum",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
+    alt: "Baumschnitt",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1493246318656-5a8d2a4e1e0e?auto=format&fit=crop&w=800&q=80",
+    alt: "Holzstapel",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=800&q=80",
+    alt: "Waldweg",
+  },
+];
+
+// Duplicate the images so the animation can loop seamlessly
+const scrollingImages = [...galleryImages, ...galleryImages];
+---
+<style>
+  #gallery {
+    overflow: hidden;
+    padding: 2rem 0;
+    margin-left: -1rem;
+    margin-right: -1rem;
+  }
+
+  .gallery-images {
+    display: flex;
+    gap: 1rem;
+    width: max-content;
+    animation: gallery-scroll 30s linear infinite;
+  }
+
+  .gallery-images img {
+    height: 10rem;
+    width: auto;
+    flex-shrink: 0;
+  }
+
+  @keyframes gallery-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+</style>
+
+<section id="gallery">
+  <div class="gallery-images">
+    {scrollingImages.map(({ src, alt }) => (
+      <img src={src} alt={alt} />
+    ))}
+  </div>
+</section>

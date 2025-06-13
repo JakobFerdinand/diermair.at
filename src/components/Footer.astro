@@ -1,0 +1,20 @@
+---
+const { class: className = "" } = Astro.props;
+---
+<style>
+  .footer {
+    width: 100%;
+    text-align: center;
+    padding: 1rem 0;
+  }
+
+  .footer-spacing {
+    margin-top: 2rem;
+  }
+</style>
+
+<footer class={`footer ${className}`.trim()}>
+    <a href="/impressum" class="margin-right-small">Impressum</a>
+    <a href="/datenschutzerklaerung">Datenschutzerklärung</a>
+</footer>
+

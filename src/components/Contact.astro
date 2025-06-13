@@ -1,9 +1,47 @@
-<section id="contact" class="flex flex-col items-center">
-    <p>Höhnhart 87</p>
-    <p>5251 Höhnhart</p>
-
-    <p><a href="tel:+436766331513">+43 676 / 6331513</a></p>
-    <p>
-        <a href="mailto:diermair.waldbewirtschaftung@gmail.com">diermair.waldbewirtschaftung@gmail.com</a>
-    </p>
+<section id="contact">
+    <h2>Kontakt</h2>
+    <div class="contact-grid">
+        <div class="contact-card">
+            <p>Höhnhart 87<br />5251 Höhnhart</p>
+            <p><a href="tel:+436766331513">+43 676 / 6331513</a></p>
+            <p>
+                <a href="mailto:diermair.waldbewirtschaftung@gmail.com">diermair.waldbewirtschaftung@gmail.com</a>
+            </p>
+        </div>
+    </div>
 </section>
+
+<style>
+  #contact {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .contact-card {
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+
+  @media (max-width: 639px) {
+    .contact-card {
+      width: 100%;
+    }
+  }
+
+  .contact-card a {
+    color: var(--green-color);
+    text-decoration: none;
+  }
+
+  #contact .contact-grid {
+    width: 100%;
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 1rem;
+  }
+</style>
