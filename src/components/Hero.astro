@@ -12,6 +12,11 @@ import Logo from '../images/Logo.svg';
     margin-top: 5rem;
   }
 
+  .hero-logo .logo {
+    width: clamp(150px, 50vw, 300px);
+    height: auto;
+  }
+
   .hero-title {
     font-size: 2.25rem;
     margin-bottom: 0.75rem;
@@ -27,7 +32,7 @@ import Logo from '../images/Logo.svg';
 
 <section id="hero">
     <div class="hero-logo">
-        <Logo />
+        <Logo class="logo" />
     </div>
     <h1 class="hero-title">Paul Diermair</h1>
     <h2 class="hero-subtitle">Forstwart & Forstwirtschaftsmeister</h2>
