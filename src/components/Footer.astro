@@ -11,6 +11,11 @@ const { class: className = "" } = Astro.props;
   .footer-spacing {
     margin-top: 2rem;
   }
+
+  .footer a {
+    color: var(--green-color);
+    text-decoration: none;
+  }
 </style>
 
 <footer class={`footer ${className}`.trim()}>
