@@ -6,19 +6,19 @@ import HolzernteIcon from '../images/chainsaw-tool-svgrepo-com.svg';
 <section id="leistungen">
     <h2>Leistungen</h2>
     <div class="leistungen-grid">
-        <div class="leistung-card">
+        <div class="leistung-card card">
             <svg width="40" height="40" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M2 5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H6l-4 4V5z" />
             </svg>
             <h3>Beratung</h3>
             <p>Individuelle Beratung für eine nachhaltige Waldbewirtschaftung.</p>
         </div>
-        <div class="leistung-card">
+        <div class="leistung-card card">
             <Image src={HolzernteIcon} alt="" width={40} height={40} />
             <h3>Holzernte</h3>
             <p>Effiziente und schonende Holzernte mit moderner Technik.</p>
         </div>
-        <div class="leistung-card">
+        <div class="leistung-card card">
             <svg width="40" height="40" viewBox="0 0 24 24" aria-hidden="true">
                 <circle cx="12" cy="12" r="6" fill="none" stroke-width="2" stroke="currentColor" />
                 <line x1="12" y1="3" x2="12" y2="7" stroke-width="2" stroke="currentColor" />
@@ -29,7 +29,7 @@ import HolzernteIcon from '../images/chainsaw-tool-svgrepo-com.svg';
             <h3>Spezialbaumfällung</h3>
             <p>Fachgerechtes Fällen von Problembäumen auch in schwierigem Gelände.</p>
         </div>
-        <div class="leistung-card">
+        <div class="leistung-card card">
             <svg width="40" height="40" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M12 2c-5 5-8 10 0 16 8-6 5-11 0-16z" />
             </svg>
@@ -54,13 +54,6 @@ import HolzernteIcon from '../images/chainsaw-tool-svgrepo-com.svg';
     gap: 1rem;
   }
 
-  .leistung-card {
-    background-color: #fff;
-    padding: 1rem;
-    border-radius: 0.5rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    text-align: center;
-  }
 
   @media (max-width: 639px) {
     .leistung-card {

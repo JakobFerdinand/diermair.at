@@ -40,7 +40,7 @@ body {
   }
 
 /* Utility class for screen reader only content */
-.sr-only {
+  .sr-only {
   position: absolute !important;
   width: 1px !important;
   height: 1px !important;
@@ -51,4 +51,13 @@ body {
   clip-path: inset(50%) !important;
   border: 0 !important;
   white-space: nowrap !important;
+}
+
+/* Generic card design */
+.card {
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  text-align: center;
 }
