@@ -8,9 +8,17 @@ import Contact from '../components/Contact.astro';
 ---
 
 <Layout title="Willkommen">
-        <Hero />
-        <Gallery />
-        <Leistungen />
-        <UeberMich />
-        <Contact />
+  <div class="content-wrapper">
+    <Hero />
+    <Gallery />
+    <Leistungen />
+    <UeberMich />
+    <Contact />
+  </div>
 </Layout>
+
+<style>
+  .content-wrapper > :global(*) + :global(*) {
+    margin-top: 5rem;
+  }
+</style>
