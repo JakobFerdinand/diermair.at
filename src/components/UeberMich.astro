@@ -9,7 +9,10 @@ import ProfilePicture from '../images/paul.jpeg';
   <p class="ueber-text">
     Hallo, ich bin Paul Diermair, 24 Jahre alt und Forstwirtschaftsmeister.
     Wenn ich nicht im Wald unterwegs bin, mache ich Musik mit meiner Gruppe
-    „Bradl4dla“. Außerdem spiele ich leidenschaftlich gerne Faust- und
+    <a
+      href="https://www.instagram.com/bradl4dla?igsh=MXNvajcxNms2MG1iOA%3D%3D&utm_source=qr"
+      >Bradl4dla</a
+    >. Außerdem spiele ich leidenschaftlich gerne Faust- und
     Volleyball, tanze in der Volkstanzgruppe und engagiere mich ehrenamtlich
     beim Roten Kreuz als Sanitäter und First Responder.
   </p>
@@ -34,5 +37,11 @@ import ProfilePicture from '../images/paul.jpeg';
   .ueber-text {
     max-width: 30rem;
     margin: 0;
+  }
+
+  .ueber-text a {
+    color: var(--green-color);
+    text-decoration: none;
+    border-bottom: 1px dotted currentColor;
   }
 </style>
