@@ -1,5 +1,8 @@
 ---
 import Logo from '../images/Logo.svg';
+
+const logoAltText =
+  'Logo der Diermair Waldbewirtschaftung – symbolisiert nachhaltige Forstwirtschaft mit drei grünen Tannenbäumen.';
 ---
 <style>
   #hero {
@@ -21,9 +24,9 @@ import Logo from '../images/Logo.svg';
 <section id="hero">
     <h1 class="sr-only">Diermair Waldbewirtschaftung</h1>
     <figure class="hero-logo">
-        <Logo class="logo" alt="Logo der Diermair Waldbewirtschaftung – symbolisiert nachhaltige Forstwirtschaft mit drei grünen Tannenbäumen." />
+        <Logo class="logo" alt={logoAltText} />
         <figcaption>
-            Logo der Diermair Waldbewirtschaftung – symbolisiert nachhaltige Forstwirtschaft mit drei grünen Tannenbäumen.
+            {logoAltText}
         </figcaption>
     </figure>
 </section>
