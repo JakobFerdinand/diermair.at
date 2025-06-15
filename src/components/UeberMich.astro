@@ -1,8 +1,11 @@
 ---
+import { Image } from "astro:assets";
+import ProfilePicture from '../images/paul.jpeg';
 ---
 <section id="ueber-mich">
-  <img class="portrait" src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?auto=format&fit=crop&w=400&q=80" alt="Paul Diermair" />
+  <Image src={ProfilePicture} class="portrait" alt="Paul Diermair" />
   <h2>Paul Diermair</h2>
+  <h3>Forstwart & Forstwirtschaftsmeister</h3>
   <p class="ueber-text">
     Hallo, ich bin Paul Diermair, 24 Jahre alt und Forstwirtschaftsmeister.
     Wenn ich nicht im Wald unterwegs bin, mache ich Musik mit meiner Gruppe
