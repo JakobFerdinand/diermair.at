@@ -16,8 +16,10 @@ const { title } = Astro.props;
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title} | Forstbewirtschaftung Diermair</title>
+                <meta name="generator" content={Astro.generator} />
+                <title>{title} | Forstbewirtschaftung Diermair</title>
+                <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site).href} />
+                <meta name="robots" content="index, follow" />
 		
 		<!-- SEO Meta Tags -->
 		<meta name="description" content="Professionelle Forstbewirtschaftung und Waldpflege in Österreich. Nachhaltige Forstwirtschaft, Holzernte und Waldmanagement von Experten." />
@@ -27,8 +29,14 @@ const { title } = Astro.props;
 		<!-- Open Graph / Social Media -->
 		<meta property="og:type" content="website" />
 		<meta property="og:title" content={`${title} | Forstbewirtschaftung Diermair`} />
-		<meta property="og:description" content="Professionelle Forstbewirtschaftung und Waldpflege in Österreich. Nachhaltige Forstwirtschaft, Holzernte und Waldmanagement von Experten." />
-		<meta property="og:site_name" content="Forstbewirtschaftung Diermair" />
+                <meta property="og:description" content="Professionelle Forstbewirtschaftung und Waldpflege in Österreich. Nachhaltige Forstwirtschaft, Holzernte und Waldmanagement von Experten." />
+                <meta property="og:site_name" content="Forstbewirtschaftung Diermair" />
+                <meta property="og:url" content={new URL(Astro.url.pathname, Astro.site).href} />
+                <meta property="og:image" content="/favicon.svg" />
+                <meta name="twitter:card" content="summary" />
+                <meta name="twitter:title" content={`${title} | Forstbewirtschaftung Diermair`} />
+                <meta name="twitter:description" content="Professionelle Forstbewirtschaftung und Waldpflege in Österreich. Nachhaltige Forstwirtschaft, Holzernte und Waldmanagement von Experten." />
+                <meta name="twitter:image" content="/favicon.svg" />
 		
 		<!-- Structured Data -->
 		<script type="application/ld+json">

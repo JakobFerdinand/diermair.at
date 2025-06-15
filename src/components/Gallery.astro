@@ -45,10 +45,10 @@ const scrollingImages = [...galleryImages, ...galleryImages];
     {scrollingImages.map((image, index) => (
       <Image
         src={image.src}
-        alt="" // Empty alt text as requested
-        width={240} // You might want to adjust this based on typical image aspect ratios
+        alt={`Galeriebild ${index + 1}`}
+        width={240}
         height={160}
-        quality='mid' // Optional: adjust quality - ensure string value
+        quality="mid"
         class="gallery-image-item"
         loading={index < 6 ? "eager" : "lazy"}
       />
