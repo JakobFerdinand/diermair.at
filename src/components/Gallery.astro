@@ -1,0 +1,57 @@
+---
+import { Image } from 'astro:assets';
+
+// Use Astro.glob to import all images from the gallery directory
+const allGalleryImageModules = await Astro.glob('../images/gallerie/*.jpeg');
+
+const galleryImages = allGalleryImageModules.map((module) => ({
+  src: module.default, // The actual image data is in the default export
+}));
+
+// Duplicate the images so the animation can loop seamlessly
+const scrollingImages = [...galleryImages, ...galleryImages];
+---
+<style>
+  #gallery {
+    overflow: hidden;
+    padding: 2rem 0;
+    margin-left: -1rem;
+    margin-right: -1rem;
+  }
+
+  .gallery-images {
+    display: flex;
+    gap: 1rem;
+    width: max-content;
+    animation: gallery-scroll 180s linear infinite;
+  }
+
+  .gallery-image-item {
+    height: 10rem;
+    width: auto;
+    max-width: 240px;
+    flex-shrink: 0;
+    object-fit: cover;
+  }
+
+  @keyframes gallery-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+</style>
+
+<section id="gallery">
+  <div class="gallery-images">
+    {scrollingImages.map((image, index) => (
+      <Image
+        src={image.src}
+        alt="" // Empty alt text as requested
+        width={240} // You might want to adjust this based on typical image aspect ratios
+        height={160}
+        quality='mid' // Optional: adjust quality - ensure string value
+        class="gallery-image-item"
+        loading={index < 6 ? "eager" : "lazy"}
+      />
+    ))}
+  </div>
+</section>

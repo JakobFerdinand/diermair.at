@@ -1,8 +1,24 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import Hero from '../components/Hero.astro';
+import Gallery from '../components/Gallery.astro';
+import Leistungen from '../components/Leistungen.astro';
+import UeberMich from '../components/UeberMich.astro';
+import Contact from '../components/Contact.astro';
 ---
 
 <Layout title="Willkommen">
-	<Welcome />
+  <div class="content-wrapper">
+    <Hero />
+    <Leistungen />
+    <UeberMich />
+    <Contact />
+    <Gallery />
+  </div>
 </Layout>
+
+<style>
+  .content-wrapper > :global(*) + :global(*) {
+    margin-top: 5rem;
+  }
+</style>

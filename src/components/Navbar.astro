@@ -1,0 +1,111 @@
+---
+const { class: className = "" } = Astro.props;
+import { Image } from 'astro:assets';
+import Logo from '../images/Logo.svg';
+---
+<nav class={`navbar ${className}`.trim()}>
+  <a href="/" class="nav-home">
+     <Logo class="logo" />
+  </a>
+  <button id="nav-toggle" class="nav-toggle" aria-expanded="false" aria-label="Menü öffnen">&#9776;</button>
+  <ul class="nav-links">
+    <li><a href="#gallery">Fotos</a></li>
+    <li><a href="#leistungen">Leistungen</a></li>
+    <li><a href="#contact">Kontakt</a></li>
+  </ul>
+</nav>
+
+<script>
+  const navToggle = document.getElementById('nav-toggle') as HTMLButtonElement | null;
+  const navbar = navToggle?.closest('.navbar') as HTMLElement | null;
+
+  navToggle?.addEventListener('click', () => {
+    const isOpen = navbar?.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  // Close mobile navigation when a link is clicked
+  document.querySelectorAll('.nav-links a').forEach((link) => {
+    link.addEventListener('click', () => {
+      if (navbar?.classList.contains('open')) {
+        navbar.classList.remove('open');
+        navToggle?.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+</script>
+
+<style>
+  .logo {
+    width: 50px;
+    height: auto;
+  }
+
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    width: 100%;
+    background-color: var(--gray-bg);
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+  }
+
+  .nav-home {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+    margin: 0;
+    margin-left: auto;
+    padding: 0;
+  }
+
+  .nav-links a {
+    color: var(--green-color);
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .nav-toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--green-color);
+    cursor: pointer;
+  }
+
+  @media (max-width: 639px) {
+    .nav-links {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      flex-direction: column;
+      background-color: var(--gray-bg);
+      padding: 0.5rem 1rem;
+    }
+
+    .navbar.open .nav-links {
+      display: flex;
+    }
+
+    .nav-toggle {
+      display: flex;
+      align-items: center;
+      margin-left: auto;
+    }
+  }

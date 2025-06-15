@@ -1,0 +1,38 @@
+---
+import { Image } from "astro:assets";
+import ProfilePicture from '../images/paul.jpeg';
+---
+<section id="ueber-mich">
+  <Image src={ProfilePicture} class="portrait" alt="Paul Diermair" />
+  <h2>Paul Diermair</h2>
+  <h3>Forstwart & Forstwirtschaftsmeister</h3>
+  <p class="ueber-text">
+    Hallo, ich bin Paul Diermair, 24 Jahre alt und Forstwirtschaftsmeister.
+    Wenn ich nicht im Wald unterwegs bin, mache ich Musik mit meiner Gruppe
+    „Bradl4dler“. Außerdem spiele ich leidenschaftlich gerne Faust- und
+    Volleyball, tanze in der Volkstanzgruppe und engagiere mich ehrenamtlich
+    beim Roten Kreuz als Sanitäter und First Responder.
+  </p>
+</section>
+
+<style>
+  #ueber-mich {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .portrait {
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+  }
+
+  .ueber-text {
+    max-width: 30rem;
+    margin: 0;
+  }
+</style>

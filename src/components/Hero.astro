@@ -1,8 +1,25 @@
 ---
-import Logo from './Logo.astro';
+import Logo from '../images/Logo.svg';
 ---
-<section id="hero" class="flex flex-col items-center">
-    <Logo />
-    <h1 class="text-4xl mb-3">Paul Diermair</h1>
-    <h1 class="text-2xl mb-8">Forstwart & Forstwirtschaftsmeister</h1>
+<style>
+  #hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-logo {
+    margin-top: 5rem;
+  }
+
+  .hero-logo .logo {
+    width: clamp(150px, 50vw, 300px);
+    height: auto;
+  }
+</style>
+
+<section id="hero">
+    <div class="hero-logo">
+        <Logo class="logo" />
+    </div>
 </section>
