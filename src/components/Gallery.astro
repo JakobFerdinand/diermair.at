@@ -1,70 +1,12 @@
 ---
-const galleryImages = [
-  { src: "/src/images/gallerie/IMG_0209.jpeg", alt: "Gallery Image 1" },
-  { src: "/src/images/gallerie/IMG_0223.jpeg", alt: "Gallery Image 2" },
-  { src: "/src/images/gallerie/IMG_1111.jpeg", alt: "Gallery Image 3" },
-  { src: "/src/images/gallerie/IMG_1133.jpeg", alt: "Gallery Image 4" },
-  { src: "/src/images/gallerie/IMG_1138.jpeg", alt: "Gallery Image 5" },
-  { src: "/src/images/gallerie/IMG_1156.jpeg", alt: "Gallery Image 6" },
-  { src: "/src/images/gallerie/IMG_1509.jpeg", alt: "Gallery Image 7" },
-  { src: "/src/images/gallerie/IMG_1510.jpeg", alt: "Gallery Image 8" },
-  { src: "/src/images/gallerie/IMG_1554.jpeg", alt: "Gallery Image 9" },
-  { src: "/src/images/gallerie/IMG_1596.jpeg", alt: "Gallery Image 10" },
-  { src: "/src/images/gallerie/IMG_1601.jpeg", alt: "Gallery Image 11" },
-  { src: "/src/images/gallerie/IMG_1605.jpeg", alt: "Gallery Image 12" },
-  { src: "/src/images/gallerie/IMG_1662.jpeg", alt: "Gallery Image 13" },
-  { src: "/src/images/gallerie/IMG_1663.jpeg", alt: "Gallery Image 14" },
-  { src: "/src/images/gallerie/IMG_1747.jpeg", alt: "Gallery Image 15" },
-  { src: "/src/images/gallerie/IMG_1802.jpeg", alt: "Gallery Image 16" },
-  { src: "/src/images/gallerie/IMG_1803.jpeg", alt: "Gallery Image 17" },
-  { src: "/src/images/gallerie/IMG_1859.jpeg", alt: "Gallery Image 18" },
-  { src: "/src/images/gallerie/IMG_1965.jpeg", alt: "Gallery Image 19" },
-  { src: "/src/images/gallerie/IMG_2236.jpeg", alt: "Gallery Image 20" },
-  { src: "/src/images/gallerie/IMG_2411.jpeg", alt: "Gallery Image 21" },
-  { src: "/src/images/gallerie/IMG_2637.jpeg", alt: "Gallery Image 22" },
-  { src: "/src/images/gallerie/IMG_2700.jpeg", alt: "Gallery Image 23" },
-  { src: "/src/images/gallerie/IMG_2706.jpeg", alt: "Gallery Image 24" },
-  { src: "/src/images/gallerie/IMG_4048.jpeg", alt: "Gallery Image 25" },
-  { src: "/src/images/gallerie/IMG_8989.jpeg", alt: "Gallery Image 26" },
-  { src: "/src/images/gallerie/IMG_9675.jpeg", alt: "Gallery Image 27" },
-  { src: "/src/images/gallerie/IMG_9677.jpeg", alt: "Gallery Image 28" },
-  { src: "/src/images/gallerie/IMG_9679.jpeg", alt: "Gallery Image 29" },
-  { src: "/src/images/gallerie/IMG_9692.jpeg", alt: "Gallery Image 30" },
-  { src: "/src/images/gallerie/image00001.jpeg", alt: "Gallery Image 31" },
-  { src: "/src/images/gallerie/image00002.jpeg", alt: "Gallery Image 32" },
-  { src: "/src/images/gallerie/image00003.jpeg", alt: "Gallery Image 33" },
-  { src: "/src/images/gallerie/image00004.jpeg", alt: "Gallery Image 34" },
-  { src: "/src/images/gallerie/image00005.jpeg", alt: "Gallery Image 35" },
-  { src: "/src/images/gallerie/image00006.jpeg", alt: "Gallery Image 36" },
-  { src: "/src/images/gallerie/image00007.jpeg", alt: "Gallery Image 37" },
-  { src: "/src/images/gallerie/image00008.jpeg", alt: "Gallery Image 38" },
-  { src: "/src/images/gallerie/image00009.jpeg", alt: "Gallery Image 39" },
-  { src: "/src/images/gallerie/image00010.jpeg", alt: "Gallery Image 40" },
-  { src: "/src/images/gallerie/image00011.jpeg", alt: "Gallery Image 41" },
-  { src: "/src/images/gallerie/image00012.jpeg", alt: "Gallery Image 42" },
-  { src: "/src/images/gallerie/image00013.jpeg", alt: "Gallery Image 43" },
-  { src: "/src/images/gallerie/image00014.jpeg", alt: "Gallery Image 44" },
-  { src: "/src/images/gallerie/image00015.jpeg", alt: "Gallery Image 45" },
-  { src: "/src/images/gallerie/image00016.jpeg", alt: "Gallery Image 46" },
-  { src: "/src/images/gallerie/image00017.jpeg", alt: "Gallery Image 47" },
-  { src: "/src/images/gallerie/image00018.jpeg", alt: "Gallery Image 48" },
-  { src: "/src/images/gallerie/image00019.jpeg", alt: "Gallery Image 49" },
-  { src: "/src/images/gallerie/image00020.jpeg", alt: "Gallery Image 50" },
-  { src: "/src/images/gallerie/image00021.jpeg", alt: "Gallery Image 51" },
-  { src: "/src/images/gallerie/image00022.jpeg", alt: "Gallery Image 52" },
-  { src: "/src/images/gallerie/image00023.jpeg", alt: "Gallery Image 53" },
-  { src: "/src/images/gallerie/image00024.jpeg", alt: "Gallery Image 54" },
-  { src: "/src/images/gallerie/image00025.jpeg", alt: "Gallery Image 55" },
-  { src: "/src/images/gallerie/image00026.jpeg", alt: "Gallery Image 56" },
-  { src: "/src/images/gallerie/image00027.jpeg", alt: "Gallery Image 57" },
-  { src: "/src/images/gallerie/image00028.jpeg", alt: "Gallery Image 58" },
-  { src: "/src/images/gallerie/image00029.jpeg", alt: "Gallery Image 59" },
-  { src: "/src/images/gallerie/image00030.jpeg", alt: "Gallery Image 60" },
-  { src: "/src/images/gallerie/image00031.jpeg", alt: "Gallery Image 61" },
-  { src: "/src/images/gallerie/image00032.jpeg", alt: "Gallery Image 62" },
-  { src: "/src/images/gallerie/image00033.jpeg", alt: "Gallery Image 63" },
-  { src: "/src/images/gallerie/image00034.jpeg", alt: "Gallery Image 64" },
-];
+import { Image } from 'astro:assets';
+
+// Use Astro.glob to import all images from the gallery directory
+const allGalleryImageModules = await Astro.glob('../images/gallerie/*.jpeg');
+
+const galleryImages = allGalleryImageModules.map((module) => ({
+  src: module.default, // The actual image data is in the default export
+}));
 
 // Duplicate the images so the animation can loop seamlessly
 const scrollingImages = [...galleryImages, ...galleryImages];
@@ -81,13 +23,15 @@ const scrollingImages = [...galleryImages, ...galleryImages];
     display: flex;
     gap: 1rem;
     width: max-content;
-    animation: gallery-scroll 30s linear infinite;
+    animation: gallery-scroll 180s linear infinite;
   }
 
-  .gallery-images img {
+  .gallery-image-item {
     height: 10rem;
     width: auto;
+    max-width: 240px;
     flex-shrink: 0;
+    object-fit: cover;
   }
 
   @keyframes gallery-scroll {
@@ -98,8 +42,16 @@ const scrollingImages = [...galleryImages, ...galleryImages];
 
 <section id="gallery">
   <div class="gallery-images">
-    {scrollingImages.map(({ src, alt }) => (
-      <img src={src} alt={alt} />
+    {scrollingImages.map((image, index) => (
+      <Image
+        src={image.src}
+        alt="" // Empty alt text as requested
+        width={240} // You might want to adjust this based on typical image aspect ratios
+        height={160}
+        quality='mid' // Optional: adjust quality - ensure string value
+        class="gallery-image-item"
+        loading={index < 6 ? "eager" : "lazy"}
+      />
     ))}
   </div>
 </section>
