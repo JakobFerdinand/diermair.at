@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import HolzernteIcon from '../images/chainsaw-tool-svgrepo-com.svg';
+import WaldpflegeIcon from '../images/trees-icon.svg';
 ---
 
 <section id="leistungen">
@@ -30,9 +31,7 @@ import HolzernteIcon from '../images/chainsaw-tool-svgrepo-com.svg';
             <p>Fachgerechtes Fällen von Problembäumen auch in schwierigem Gelände.</p>
         </div>
         <div class="leistung-card card">
-            <svg width="40" height="40" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M12 2c-5 5-8 10 0 16 8-6 5-11 0-16z" />
-            </svg>
+            <Image src={WaldpflegeIcon} alt="" width={40} height={40} />
             <h3>Waldpflege</h3>
             <p>Pflegearbeiten für gesunde und stabile Waldbestände.</p>
         </div>
