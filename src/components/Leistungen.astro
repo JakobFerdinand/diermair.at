@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import HolzernteIcon from '../images/chainsaw-tool-svgrepo-com.svg';
-import WaldpflegeIcon from '../images/trees-icon.svg';
+import { Axe, Trees } from '@lucide/astro';
 ---
 
 <section id="leistungen">
@@ -15,7 +15,7 @@ import WaldpflegeIcon from '../images/trees-icon.svg';
             <p>Individuelle Beratung für eine nachhaltige Waldbewirtschaftung.</p>
         </div>
         <div class="leistung-card card">
-            <Image src={HolzernteIcon} alt="" width={40} height={40} />
+            <Axe width={40} height={40} />
             <h3>Holzernte</h3>
             <p>Effiziente und schonende Holzernte mit moderner Technik.</p>
         </div>
@@ -31,7 +31,7 @@ import WaldpflegeIcon from '../images/trees-icon.svg';
             <p>Fachgerechtes Fällen von Problembäumen auch in schwierigem Gelände.</p>
         </div>
         <div class="leistung-card card">
-            <Image src={WaldpflegeIcon} alt="" width={40} height={40} />
+            <Trees width={40} height={40} />
             <h3>Waldpflege</h3>
             <p>Pflegearbeiten für gesunde und stabile Waldbestände.</p>
         </div>
