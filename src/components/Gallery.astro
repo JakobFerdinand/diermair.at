@@ -50,7 +50,7 @@ const scrollingImages = [...galleryImages, ...galleryImages];
         height={160}
         quality="mid"
         class="gallery-image-item"
-        loading={index < 6 ? "eager" : "lazy"}
+        loading={index < galleryImages.length ? "eager" : "lazy"}
       />
     ))}
   </div>
