@@ -1,16 +1,14 @@
 ---
 import { Image } from 'astro:assets';
 import HolzernteIcon from '../images/chainsaw-tool-svgrepo-com.svg';
-import { Axe, Trees } from '@lucide/astro';
+import { Axe, Trees, MessageSquare, Crosshair } from '@lucide/astro';
 ---
 
 <section id="leistungen">
     <h2>Leistungen</h2>
     <div class="leistungen-grid">
         <div class="leistung-card card">
-            <svg width="40" height="40" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M2 5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H6l-4 4V5z" />
-            </svg>
+            <MessageSquare width={40} height={40} />
             <h3>Beratung</h3>
             <p>Individuelle Beratung für eine nachhaltige Waldbewirtschaftung.</p>
         </div>
@@ -20,13 +18,7 @@ import { Axe, Trees } from '@lucide/astro';
             <p>Effiziente und schonende Holzernte mit moderner Technik.</p>
         </div>
         <div class="leistung-card card">
-            <svg width="40" height="40" viewBox="0 0 24 24" aria-hidden="true">
-                <circle cx="12" cy="12" r="6" fill="none" stroke-width="2" stroke="currentColor" />
-                <line x1="12" y1="3" x2="12" y2="7" stroke-width="2" stroke="currentColor" />
-                <line x1="12" y1="17" x2="12" y2="21" stroke-width="2" stroke="currentColor" />
-                <line x1="3" y1="12" x2="7" y2="12" stroke-width="2" stroke="currentColor" />
-                <line x1="17" y1="12" x2="21" y2="12" stroke-width="2" stroke="currentColor" />
-            </svg>
+            <Crosshair width={40} height={40} />
             <h3>Spezialbaumfällung</h3>
             <p>Fachgerechtes Fällen von Problembäumen auch in schwierigem Gelände.</p>
         </div>
