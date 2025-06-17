@@ -1,10 +1,10 @@
 ---
 import { Image } from 'astro:assets';
 
-// Use Astro.glob to import all images from the gallery directory
-const allGalleryImageModules = await Astro.glob('../images/gallerie/*.jpeg');
+// Use import.meta.glob to import all images from the gallery directory
+const allGalleryImageModules = import.meta.glob('../images/gallerie/*.jpeg', { eager: true });
 
-const galleryImages = allGalleryImageModules.map((module) => ({
+const galleryImages = Object.values(allGalleryImageModules).map((module) => ({
   src: module.default, // The actual image data is in the default export
 }));
 
