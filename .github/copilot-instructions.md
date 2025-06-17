@@ -7,12 +7,12 @@ This repository contains the website for Forstbewirtschaftung Diermair, a forest
 - **Site Type**: Business landing page for forestry management
 - **Purpose**: Showcase services, contact information, and expertise in forest management
 - **Framework**: Astro v5
-- **Styling**: Tailwind CSS 4.x
+- **Styling**: Vanilla CSS inside `<style>` tags in the `.astro` files.
 
 ## Technology Stack
 
 - **Astro v5**: Used for building the site with its component-based architecture and zero-JS by default approach
-- **Tailwind CSS 4.x**: For styling
+- **Styling**: Vanilla CSS inside `<style>` tags in the `.astro` files.
 - **View Transitions API**: For smooth page transitions where applicable
 - **Static Site Generation**: Site is primarily statically generated
 
@@ -44,20 +44,13 @@ const { title } = Astro.props;
   <h2>{title}</h2>
   <slot />
 </div>
-```
 
-### Tailwind CSS
-
-- Use Tailwind utility classes directly in HTML
-- Follow mobile-first approach for responsive design
-- Use custom theme variables from `tailwind.config.mjs` for colors, spacing, etc.
-- Group related utility classes together for readability
-- Use Tailwind's arbitrary value syntax when needed: `[w-calc(100%-2rem)]`
-
-```html
-<button class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-dark transition-colors">
-  Contact Us
-</button>
+<!-- Style (CSS) -->
+<style>
+.component {
+  ...
+}
+</style>
 ```
 
 ### Project Structure
@@ -65,14 +58,13 @@ const { title } = Astro.props;
 ```
 diermair.at/
 ├── public/           # Static assets
-│   ├── images/       # Image files
 │   └── fonts/        # Font files
 ├── src/
 │   ├── components/   # Reusable components
+│   ├── images/       # Image files
 │   ├── layouts/      # Page layouts
 │   ├── pages/        # Page components (routes)
 │   ├── styles/       # Global styles
-│   └── utils/        # Utility functions
 ├── astro.config.mjs  # Astro configuration
 ```
 
@@ -89,7 +81,7 @@ diermair.at/
 - Lazy load off-screen images
 - Minimize JavaScript usage
 - Implement proper caching strategies
-- Keep CSS lean by leveraging Tailwind's purging
+- Keep CSS lean 
 
 ## SEO Considerations
 
@@ -114,7 +106,6 @@ diermair.at/
 
 ## Environment Variables
 
-- Use `.env` files for environment-specific configuration
 - Never expose sensitive information in client-side code
 
 ## Content Guidelines
@@ -134,7 +125,7 @@ When suggesting code:
 2. Prefer Astro's built-in features over additional dependencies
 3. Suggest accessible markup following ARIA best practices
 4. Consider image optimization techniques for forestry photographs
-5. Use the established color palette from the Tailwind configuration
+5. Use the established color palette from the styles/global.css
 6. Suggest responsive designs that work well on mobile devices
 7. Keep suggestions within the existing architectural patterns
 8. Consider performance implications of your suggestions

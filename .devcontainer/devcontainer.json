@@ -7,7 +7,6 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"bradlc.vscode-tailwindcss",
 				"github.vscode-github-actions",
 				"astro-build.astro-vscode"
 			]
