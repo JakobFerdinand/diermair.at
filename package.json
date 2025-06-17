@@ -4,12 +4,16 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro check & astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
     "astro": "^5.9.3",
     "@lucide/astro": "0.515.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.4",
+    "typescript": "^5.8.3"
   }
 }

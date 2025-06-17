@@ -1,8 +1,9 @@
 ---
 import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 
 // Use import.meta.glob to import all images from the gallery directory
-const allGalleryImageModules = import.meta.glob('../images/gallerie/*.jpeg', { eager: true });
+const allGalleryImageModules = import.meta.glob<{ default: ImageMetadata }>('../images/gallerie/*.jpeg', { eager: true });
 
 const galleryImages = Object.values(allGalleryImageModules).map((module) => ({
   src: module.default, // The actual image data is in the default export

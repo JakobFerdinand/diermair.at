@@ -14,69 +14,99 @@ const { title } = Astro.props;
 <html lang="de">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-                <meta name="generator" content={Astro.generator} />
-                <title>{title} | Forstbewirtschaftung Diermair</title>
-                <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site).href} />
-                <meta name="robots" content="index, follow" />
-		
+		<meta name="generator" content={Astro.generator} />
+		<title>{title} | Forstbewirtschaftung Diermair</title>
+		<link
+			rel="canonical"
+			href={new URL(Astro.url.pathname, Astro.site).href}
+		/>
+		<meta name="robots" content="index, follow" />
+
 		<!-- SEO Meta Tags -->
-		<meta name="description" content="Professionelle Forstbewirtschaftung und Waldpflege in Österreich. Nachhaltige Forstwirtschaft, Holzernte und Waldmanagement von Experten." />
-		<meta name="keywords" content="Forstwirtschaft, Waldpflege, Forstbewirtschaftung, Holzernte, nachhaltiger Wald, Österreich, Waldmanagement" />
+		<meta
+			name="description"
+			content="Professionelle Forstbewirtschaftung und Waldpflege in Österreich. Nachhaltige Forstwirtschaft, Holzernte und Waldmanagement von Experten."
+		/>
+		<meta
+			name="keywords"
+			content="Forstwirtschaft, Waldpflege, Forstbewirtschaftung, Holzernte, nachhaltiger Wald, Österreich, Waldmanagement"
+		/>
 		<meta name="author" content="Forstbewirtschaftung Diermair" />
-		
+
 		<!-- Open Graph / Social Media -->
 		<meta property="og:type" content="website" />
-		<meta property="og:title" content={`${title} | Forstbewirtschaftung Diermair`} />
-                <meta property="og:description" content="Professionelle Forstbewirtschaftung und Waldpflege in Österreich. Nachhaltige Forstwirtschaft, Holzernte und Waldmanagement von Experten." />
-                <meta property="og:site_name" content="Forstbewirtschaftung Diermair" />
-                <meta property="og:url" content={new URL(Astro.url.pathname, Astro.site).href} />
-                <meta property="og:image" content="/favicon.svg" />
-                <meta name="twitter:card" content="summary" />
-                <meta name="twitter:title" content={`${title} | Forstbewirtschaftung Diermair`} />
-                <meta name="twitter:description" content="Professionelle Forstbewirtschaftung und Waldpflege in Österreich. Nachhaltige Forstwirtschaft, Holzernte und Waldmanagement von Experten." />
-                <meta name="twitter:image" content="/favicon.svg" />
-		
+		<meta
+			property="og:title"
+			content={`${title} | Forstbewirtschaftung Diermair`}
+		/>
+		<meta
+			property="og:description"
+			content="Professionelle Forstbewirtschaftung und Waldpflege in Österreich. Nachhaltige Forstwirtschaft, Holzernte und Waldmanagement von Experten."
+		/>
+		<meta property="og:site_name" content="Forstbewirtschaftung Diermair" />
+		<meta
+			property="og:url"
+			content={new URL(Astro.url.pathname, Astro.site).href}
+		/>
+		<meta property="og:image" content={new URL("/src/images/Logo.svg", Astro.site).href} />
+		<meta property="og:image:alt" content="Logo Forstbewirtschaftung Diermair" />
+		<meta property="og:locale" content="de_AT" />
+
+		<!-- Twitter Card Meta Tags -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta
+			name="twitter:title"
+			content={`${title} | Forstbewirtschaftung Diermair`}
+		/>
+		<meta
+			name="twitter:description"
+			content="Professionelle Forstbewirtschaftung und Waldpflege in Österreich. Nachhaltige Forstwirtschaft, Holzernte und Waldmanagement von Experten."
+		/>
+		<meta name="twitter:image" content={new URL("/src/images/Logo.svg", Astro.site).href} />
+		<meta name="twitter:image:alt" content="Logo Forstbewirtschaftung Diermair" />
+
 		<!-- Structured Data -->
-		<script type="application/ld+json">
-			const structuredData = {
+		<script type="application/ld+json" is:inline>
+			{
 				"@context": "https://schema.org",
 				"@type": "LocalBusiness",
 				"name": "Forstbewirtschaftung Diermair",
 				"description": "Professionelle Forstbewirtschaftung und Waldpflege in Österreich",
-				"image": "/favicon.svg", 
+				"image": "/favicon.svg",
 				"address": {
 					"@type": "PostalAddress",
 					"addressCountry": "AT",
 					"addressRegion": "Oberösterreich"
 				},
 				"areaServed": "Oberösterreich",
-				"serviceType": ["Forstbewirtschaftung", "Waldpflege", "Holzernte"],
+				"serviceType": [
+					"Forstbewirtschaftung",
+					"Waldpflege",
+					"Holzernte"
+				],
 				"priceRange": "€€"
-			};
-			document.currentScript.textContent = JSON.stringify(structuredData);
+			}
 		</script>
 	</head>
-       <body>
-
-               <Navbar />
-               <main class="main-content">
-                 <slot />
-               </main>
-               <Footer class="mt-auto footer-spacing" />
-       </body>
+	<body>
+		<Navbar />
+		<main class="main-content">
+			<slot />
+		</main>
+		<Footer class="mt-auto footer-spacing" />
+	</body>
 </html>
 <style>
-        .main-content {
-                flex-grow: 1;
-                width: 100%;
-                max-width: 1280px; /* Example max-width, adjust as needed */
-                padding: 1rem;
-                margin: 0 auto;
-                display: flex;
-                flex-direction: column;
-                gap: 2rem;
-        }
+	.main-content {
+		flex-grow: 1;
+		width: 100%;
+		max-width: 1280px; /* Example max-width, adjust as needed */
+		padding: 1rem;
+		margin: 0 auto;
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+	}
 </style>
-
