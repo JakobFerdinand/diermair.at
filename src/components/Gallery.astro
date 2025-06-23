@@ -15,24 +15,32 @@ const scrollingImages = [...galleryImages, ...galleryImages];
 <style>
   #gallery {
     overflow: hidden;
-    padding: 2rem 0;
+    padding: 4rem 0;
     margin-left: -1rem;
     margin-right: -1rem;
   }
 
+  .gallery-title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+
   .gallery-images {
     display: flex;
-    gap: 1rem;
+    gap: 2rem;
     width: max-content;
     animation: gallery-scroll 180s linear infinite;
   }
 
   .gallery-image-item {
-    height: 10rem;
+    height: 12rem;
     width: auto;
-    max-width: 240px;
+    max-width: 280px;
     flex-shrink: 0;
     object-fit: cover;
+    border-radius: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
 
   @keyframes gallery-scroll {
@@ -42,13 +50,14 @@ const scrollingImages = [...galleryImages, ...galleryImages];
 </style>
 
 <section id="gallery">
+  <h2 class="gallery-title">Einblicke in meine Arbeit</h2>
   <div class="gallery-images">
     {scrollingImages.map((image, index) => (
       <Image
         src={image.src}
         alt={`Galeriebild ${index + 1}`}
-        width={240}
-        height={160}
+        width={280}
+        height={192}
         quality="mid"
         class="gallery-image-item"
         loading={index < galleryImages.length ? "eager" : "lazy"}
