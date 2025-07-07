@@ -9,7 +9,7 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.10.1",
+    "astro": "^5.11.0",
     "@lucide/astro": "0.525.0"
   },
   "devDependencies": {
