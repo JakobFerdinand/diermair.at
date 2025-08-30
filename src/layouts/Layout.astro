@@ -90,13 +90,26 @@ const { title } = Astro.props;
 			}
 		</script>
 	</head>
-	<body>
-		<Navbar />
-		<main class="main-content">
-			<slot />
-		</main>
-		<Footer class="mt-auto footer-spacing" />
-	</body>
+        <body>
+                <Navbar />
+                <main class="main-content">
+                        <slot />
+                </main>
+                <Footer class="mt-auto footer-spacing" />
+                <script is:inline>
+                        const observer = new IntersectionObserver((entries) => {
+                                entries.forEach((entry) => {
+                                        if (entry.isIntersecting) {
+                                                entry.target.classList.add("show");
+                                        } else {
+                                                entry.target.classList.remove("show");
+                                        }
+                                });
+                        });
+
+                        document.querySelectorAll(".card").forEach((card) => observer.observe(card));
+                </script>
+        </body>
 </html>
 <style>
 	.main-content {
