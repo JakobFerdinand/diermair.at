@@ -10,13 +10,34 @@ updates:
     directory: "/"
     schedule:
       interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: "Europe/Vienna"
+    groups:
+      github-actions-all:
+        patterns:
+          - "*"
       
   - package-ecosystem: "devcontainers"
     directory: "/"
     schedule:
       interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: "Europe/Vienna"
+    groups:
+      devcontainers-all:
+        patterns:
+          - "*"
      
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
       interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: "Europe/Vienna"
+    groups:
+      npm-all:
+        patterns:
+          - "*"
