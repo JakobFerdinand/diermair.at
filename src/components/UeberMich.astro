@@ -24,7 +24,7 @@ import UeberMichText from '../data/ueber-mich.md';
 <style>
   /* Card-Container */
   #ueber-mich.card {
-    max-width: 40rem;
+    width: 100%;
     margin: 2rem auto;
     display: flex;
     flex-direction: column;
@@ -70,6 +70,10 @@ import UeberMichText from '../data/ueber-mich.md';
 
   .ueber-text :global(p) {
     margin: 0;
+  }
+
+  .ueber-text :global(p + p) {
+    margin-top: 1rem;
   }
 
   .ueber-text :global(a) {
