@@ -1,30 +1,28 @@
 ---
+import { getCollection } from 'astro:content';
 import { Axe, Trees, MessageSquare, Crosshair } from '@lucide/astro';
+
+const iconMap = { MessageSquare, Axe, Crosshair, Trees } as const;
+
+const leistungen = (await getCollection('leistungen')).sort(
+  (a, b) => a.data.order - b.data.order
+);
 ---
 
 <section id="leistungen">
     <h2>Leistungen</h2>
     <div class="leistungen-grid">
-        <div class="leistung-card card">
-            <MessageSquare width={40} height={40} />
-            <h3>Beratung</h3>
-            <p>Individuelle Beratung für eine nachhaltige Waldbewirtschaftung.</p>
-        </div>
-        <div class="leistung-card card">
-            <Axe width={40} height={40} />
-            <h3>Holzernte</h3>
-            <p>Effiziente und schonende Holzernte mit moderner Technik.</p>
-        </div>
-        <div class="leistung-card card">
-            <Crosshair width={40} height={40} />
-            <h3>Spezialbaumfällung</h3>
-            <p>Fachgerechtes Fällen von Problembäumen auch in schwierigem Gelände.</p>
-        </div>
-        <div class="leistung-card card">
-            <Trees width={40} height={40} />
-            <h3>Waldpflege</h3>
-            <p>Pflegearbeiten für gesunde und stabile Waldbestände.</p>
-        </div>
+        {leistungen.map((leistung) => {
+            const Icon = iconMap[leistung.data.icon];
+            return (
+                <a href={`/leistungen/${leistung.id}`} class="leistung-card card">
+                    <Icon width={40} height={40} />
+                    <h3>{leistung.data.title}</h3>
+                    <p>{leistung.data.teaser}</p>
+                    <span class="mehr-link">Mehr erfahren</span>
+                </a>
+            );
+        })}
     </div>
 </section>
 
@@ -43,6 +41,27 @@ import { Axe, Trees, MessageSquare, Crosshair } from '@lucide/astro';
     gap: 1rem;
   }
 
+  .leistung-card {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out, box-shadow 0.2s ease;
+  }
+
+  .leistung-card:hover {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  .mehr-link {
+    display: inline-block;
+    margin-top: 0.75rem;
+    font-weight: bold;
+    color: var(--green-color);
+  }
+
+  .leistung-card:hover .mehr-link {
+    text-decoration: underline;
+  }
 
   @media (max-width: 639px) {
     .leistung-card {

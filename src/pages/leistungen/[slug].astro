@@ -1,0 +1,88 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import { Axe, Trees, MessageSquare, Crosshair } from '@lucide/astro';
+import type { InferGetStaticPropsType } from 'astro';
+
+const iconMap = { MessageSquare, Axe, Crosshair, Trees } as const;
+
+export async function getStaticPaths() {
+  const leistungen = await getCollection('leistungen');
+  return leistungen.map((leistung) => ({
+    params: { slug: leistung.id },
+    props: { leistung },
+  }));
+}
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { leistung } = Astro.props;
+const { Content } = await render(leistung);
+const Icon = iconMap[leistung.data.icon];
+---
+
+<Layout title={leistung.data.title}>
+  <article class="leistung-detail">
+    <a href="/#leistungen" class="back-link">&larr; Zurück zur Übersicht</a>
+    <div class="leistung-header">
+      <Icon width={48} height={48} />
+      <h1>{leistung.data.title}</h1>
+    </div>
+    <div class="leistung-content">
+      <Content />
+    </div>
+    <a href="/#contact" class="cta-link">Jetzt anfragen</a>
+  </article>
+</Layout>
+
+<style>
+  .leistung-detail {
+    max-width: 42rem;
+    margin: 0 auto;
+    text-align: left;
+  }
+
+  .back-link {
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    color: var(--green-color);
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .back-link:hover {
+    text-decoration: underline;
+  }
+
+  .leistung-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .leistung-header h1 {
+    margin: 0;
+  }
+
+  .leistung-content {
+    line-height: 1.7;
+    font-size: 1.1rem;
+  }
+
+  .cta-link {
+    display: inline-block;
+    margin-top: 2rem;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--green-color);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 0.5rem;
+    font-weight: bold;
+    transition: opacity 0.2s ease;
+  }
+
+  .cta-link:hover {
+    opacity: 0.85;
+  }
+</style>
