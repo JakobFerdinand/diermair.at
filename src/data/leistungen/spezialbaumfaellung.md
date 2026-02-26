@@ -5,4 +5,8 @@ teaser: Fachgerechtes Fällen von Problembäumen auch in schwierigem Gelände.
 order: 3
 ---
 
-Im Gegenteil zu „normalen" Fällungen, liegen im Bereich der Spezialbaumfällung meist erschwerende Umstände vor, welche durch eine genaue Analyse und eine sorgfältige Arbeitsweise (Abtragung) gebannt werden können. Dies ist meist der Fall, wenn der Baum in unmittelbarer Nähe zu Häusern und Gebäuden, auf engen, schwer zugänglichen Grundstücken, an Hängen, in der Nähe von Straßen oder diversen Freileitungen (Strom, Telefon, usw.) steht. Des Weiteren können auch unterschiedliche Situationen den Baum selbst zum Spezialfall machen, da oftmals Krankheiten und oder Beschädigungen (Wind & Wetter) die Vitalität & Stabilität des Baumes beinträchtigen. Die Ausführung erfolgt oftmals mit maschineller Unterstützung von Forstmaschinen (Harvester, Seilwinde, Krananhänger) oder LKW-Kränen um keinen Kompromiss, der Sicherheit betreffend, einzugehen. Die höchste Priorität wird dem Schutz von Mensch & Objekt zugewiesen.
+Im Unterschied zu einer klassischen Fällung liegen bei der Spezialbaumfällung oft besondere Herausforderungen vor. Dazu zählen etwa Bäume in der Nähe von Häusern, auf engen oder schwer zugänglichen Grundstücken, an Hängen, entlang von Straßen oder bei Freileitungen.
+
+Auch geschädigte oder instabile Bäume durch Krankheit, Sturm oder Alter erfordern ein besonders umsichtiges Vorgehen. Deshalb setze ich auf eine sorgfältige Analyse, eine sichere Abtragung und - wenn nötig - auf die Unterstützung durch geeignete Maschinen wie Harvester, Seilwinde, Krananhänger oder LKW-Kran.
+
+Oberste Priorität haben dabei immer die Sicherheit von Menschen und der Schutz von Gebäuden und Infrastruktur.
