@@ -16,8 +16,10 @@ const leistungen = (await getCollection('leistungen')).sort(
             const Icon = iconMap[leistung.data.icon];
             return (
                 <a href={`/leistungen/${leistung.id}`} class="leistung-card card">
-                    <Icon width={40} height={40} />
-                    <h3>{leistung.data.title}</h3>
+                    <div class="leistung-title">
+                        <Icon width={32} height={32} />
+                        <h3>{leistung.data.title}</h3>
+                    </div>
                     <p>{leistung.data.teaser}</p>
                     <span class="mehr-link">Mehr erfahren</span>
                 </a>
@@ -42,6 +44,8 @@ const leistungen = (await getCollection('leistungen')).sort(
   }
 
   .leistung-card {
+    display: flex;
+    flex-direction: column;
     text-decoration: none;
     color: inherit;
     cursor: pointer;
@@ -52,9 +56,20 @@ const leistungen = (await getCollection('leistungen')).sort(
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
   }
 
+  .leistung-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .leistung-title h3 {
+    margin: 0;
+  }
+
   .mehr-link {
     display: inline-block;
-    margin-top: 0.75rem;
+    margin-top: auto;
+    padding-top: 0.75rem;
     font-weight: bold;
     color: var(--green-color);
   }
