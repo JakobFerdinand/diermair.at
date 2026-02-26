@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import ProfilePicture from '../images/paul.jpeg';
+import UeberMichText from '../data/ueber-mich.md';
 ---
 <section id="ueber-mich" class="card">
   <div class="card-content">
@@ -13,17 +14,9 @@ import ProfilePicture from '../images/paul.jpeg';
     <div class="text-content">
       <h2>Paul Diermair</h2>
       <h3>Forstwart & Forstwirtschaftsmeister</h3>
-      <p class="ueber-text">
-        Hallo, ich bin <strong>Paul Diermair</strong>, 24 Jahre alt und
-        <strong>Forstwirtschaftsmeister</strong>. Wenn ich nicht im Wald
-        unterwegs bin, mache ich Musik mit meiner Gruppe
-        <a
-          href="https://www.instagram.com/bradl4dla?igsh=MXNvajcxNms2MG1iOA%3D%3D&utm_source=qr"
-          >Bradl4dla</a
-        >. Außerdem spiele ich leidenschaftlich gerne Faust- und Volleyball,
-        tanze in der Volks­tanz­gruppe und engagiere mich ehrenamtlich beim
-        Roten Kreuz als Sanitäter und First Responder.
-      </p>
+      <div class="ueber-text">
+        <UeberMichText />
+      </div>
     </div>
   </div>
 </section>
@@ -31,52 +24,68 @@ import ProfilePicture from '../images/paul.jpeg';
 <style>
   /* Card-Container */
   #ueber-mich.card {
-    max-width: 40rem;
+    width: 100%;
     margin: 2rem auto;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
   }
 
   /* Inhalt wrapper für flexibles Layout */
   .card-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    width: 100%;
+    max-width: 56rem;
+    margin: 0 auto;
+    display: grid;
+    gap: 1.5rem;
+    justify-items: center;
   }
 
   /* Profilbild */
   .portrait {
-    width: 10rem;
-    height: 10rem;
+    width: clamp(9rem, 28vw, 12rem);
+    height: clamp(9rem, 28vw, 12rem);
     border-radius: 50%;
     object-fit: cover;
-    margin-bottom: 1.5rem;
     border: 4px solid var(--green-color);
+    box-shadow: 0 8px 20px rgba(20, 83, 45, 0.2);
   }
 
   /* Textbereich */
+  .text-content {
+    width: min(100%, 42rem);
+    text-align: center;
+  }
+
   .text-content h2 {
-    font-size: 2rem;
+    font-size: clamp(1.75rem, 3vw, 2.2rem);
     margin: 0;
     color: var(--green-color);
+    line-height: 1.2;
   }
 
   .text-content h3 {
-    font-size: 1.25rem;
-    margin: 0.5rem 0 1rem;
+    font-size: clamp(1.05rem, 2vw, 1.3rem);
+    margin: 0.4rem 0 1rem;
     color: var(--green-color);
     font-weight: 500;
   }
 
   .ueber-text {
-    max-width: 30rem;
-    margin: 0;
+    max-width: 60ch;
     line-height: 1.6;
     color: #333;
   }
 
-  .ueber-text a {
+  .ueber-text :global(p) {
+    margin: 0;
+  }
+
+  .ueber-text :global(p + p) {
+    margin-top: 1rem;
+  }
+
+  .ueber-text :global(a) {
     color: var(--green-color);
     text-decoration: none;
     border-bottom: 1px dotted currentColor;
@@ -84,14 +93,24 @@ import ProfilePicture from '../images/paul.jpeg';
 
   /* Desktop: zweispaltig */
   @media (min-width: 768px) {
+    #ueber-mich.card {
+      padding: 2.25rem 2.5rem;
+    }
+
     #ueber-mich.card .card-content {
-      flex-direction: row;
-      align-items: flex-start;
+      grid-template-columns: minmax(11rem, 14rem) minmax(0, 1fr);
+      align-items: center;
+      justify-items: start;
+      gap: 2rem 2.5rem;
+    }
+
+    .text-content {
+      width: 100%;
       text-align: left;
     }
-    .portrait {
-      margin-right: 2rem;
-      margin-bottom: 0;
+
+    .ueber-text {
+      max-width: none;
     }
   }
 </style>

@@ -1,0 +1,5 @@
+Der **Wald** begleitet mich seit meiner Kindheit. Schon damals war ich häufig mit meinem Opa unterwegs - und genau dort entstand meine Begeisterung für das Ökosystem Wald und die Forstwirtschaft. Dieser rote Faden zieht sich seither durch meinen schulischen und beruflichen Weg bis heute.
+
+Durch meine Ausbildung zum Forstwart mit dem Modul Spezielle Forsttechnik sowie den Abschluss zum **Forstwirtschaftsmeister** und die gesammelte Praxiserfahrung kann ich auf fundierte Kenntnisse in der motormanuellen Holzernte (Motorsäge) und vollmechanisierten Holzernte (Harvester, Forwarder, Seilkran) zurückgreifen.
+
+Regelmäßige Fortbildungen sind für mich ein zentraler Bestandteil meiner Arbeit - um Erfahrungen zu vertiefen, neue Entwicklungen aufzunehmen und meinen Betrieb kontinuierlich weiterzuentwickeln. Ein Beispiel dafür ist das **ZÖFU-Zertifikat** (zertifiziertes österreichisches Forstunternehmen), das durch regelmäßige Kontrollen die Qualität und Professionalität des Betriebes sicherstellt.
