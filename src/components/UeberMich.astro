@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import ProfilePicture from '../images/paul.jpeg';
+import UeberMichText from '../data/ueber-mich.md';
 ---
 <section id="ueber-mich" class="card">
   <div class="card-content">
@@ -13,17 +14,9 @@ import ProfilePicture from '../images/paul.jpeg';
     <div class="text-content">
       <h2>Paul Diermair</h2>
       <h3>Forstwart & Forstwirtschaftsmeister</h3>
-      <p class="ueber-text">
-        Hallo, ich bin <strong>Paul Diermair</strong>, 24 Jahre alt und
-        <strong>Forstwirtschaftsmeister</strong>. Wenn ich nicht im Wald
-        unterwegs bin, mache ich Musik mit meiner Gruppe
-        <a
-          href="https://www.instagram.com/bradl4dla?igsh=MXNvajcxNms2MG1iOA%3D%3D&utm_source=qr"
-          >Bradl4dla</a
-        >. Außerdem spiele ich leidenschaftlich gerne Faust- und Volleyball,
-        tanze in der Volks­tanz­gruppe und engagiere mich ehrenamtlich beim
-        Roten Kreuz als Sanitäter und First Responder.
-      </p>
+      <div class="ueber-text">
+        <UeberMichText />
+      </div>
     </div>
   </div>
 </section>
@@ -71,12 +64,15 @@ import ProfilePicture from '../images/paul.jpeg';
 
   .ueber-text {
     max-width: 30rem;
-    margin: 0;
     line-height: 1.6;
     color: #333;
   }
 
-  .ueber-text a {
+  .ueber-text :global(p) {
+    margin: 0;
+  }
+
+  .ueber-text :global(a) {
     color: var(--green-color);
     text-decoration: none;
     border-bottom: 1px dotted currentColor;
