@@ -5,4 +5,6 @@ teaser: Pflegearbeiten für gesunde und stabile Waldbestände.
 order: 4
 ---
 
-Für die Zukunft unserer Wälder, gehört die Waldpflege mit allen Bereichen (Kulturpflege & Dickungspflege) so wie der zeitlich perfekt abgestimmten Erst/Zweit-Durchforstung als wesentlicher Teil für ein Kreislaufsystem dazu. Um hiebsreifes qualitativ hochwertiges Holz erzeugen zu können, müssen bereits im Jugendstadium wichtige Schritte gesetzt werden.
+Für die Zukunft unserer Wälder ist eine vorausschauende Waldpflege entscheidend. Dazu gehören Kulturpflege und Dickungspflege ebenso wie zeitlich abgestimmte Erst- und Zweitdurchforstungen.
+
+Damit später hochwertiges, hiebsreifes Holz bereitsteht, werden wichtige Maßnahmen bereits im Jugendstadium des Bestands gesetzt. So entsteht ein stabiler, gesunder Wald, der ökologisch und wirtschaftlich langfristig tragfähig bleibt.
