@@ -41,15 +41,15 @@ resources, but gated on a what-if review first — if what-if reports a destruct
 
 Checkboxes are updated as work progresses.
 
-- [ ] Create git branch `feat/infrastructure-as-code`
+- [x] Create git branch `feat/infrastructure-as-code`
 - [x] Write infrastructure plan (`docs/plans/infrastructure-as-code.md`)
-- [ ] Scaffold Bicep templates (`main.bicep`, optional `main-subscription.bicep`, modules, `*.bicepparam`, `bicepconfig.json`)
-- [ ] Validate templates locally (`az bicep build` + `az deployment group what-if`)
-- [ ] Write `.github/workflows/infra-deploy.yml` (what-if PR job + deploy on main)
+- [x] Scaffold Bicep templates (`main.bicep`, optional `main-subscription.bicep`, modules, `*.bicepparam`, `bicepconfig.json`)
+- [x] Validate templates locally (`az bicep build` + `az deployment group what-if`)
+- [x] Write `.github/workflows/infra-deploy.yml` (what-if PR job + deploy on main)
 - [ ] Manual: create service principal + OIDC federated credential scoped to RG-diermairat, add GitHub secrets (`AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_SUBSCRIPTION_ID`)
 - [ ] First deploy: review what-if → apply → verify site stays live and custom domains remain intact
 - [ ] Optional: create subscription cost budget via `main-subscription.bicep`
-- [ ] Update README (and add an AGENTS.md section) documenting the deployment commands
+- [x] Update README (and add an AGENTS.md section) documenting the deployment commands
 - [ ] Open pull request and merge to main
 
 ## 1. Bicep structure under `infrastructure/`
