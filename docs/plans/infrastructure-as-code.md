@@ -46,11 +46,11 @@ Checkboxes are updated as work progresses.
 - [x] Scaffold Bicep templates (`main.bicep`, optional `main-subscription.bicep`, modules, `*.bicepparam`, `bicepconfig.json`)
 - [x] Validate templates locally (`az bicep build` + `az deployment group what-if`)
 - [x] Write `.github/workflows/infra-deploy.yml` (what-if PR job + deploy on main)
-- [ ] Manual: create service principal + OIDC federated credential scoped to RG-diermairat, add GitHub secrets (`AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_SUBSCRIPTION_ID`)
-- [ ] First deploy: review what-if → apply → verify site stays live and custom domains remain intact
-- [ ] Optional: create subscription cost budget via `main-subscription.bicep`
+- [x] Manual: create service principal + OIDC federated credential scoped to RG-diermairat, add GitHub secrets (`AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_SUBSCRIPTION_ID`)
+- [x] First deploy: review what-if → apply → verify site stays live and custom domains remain intact
+- [x] Optional: create subscription cost budget via `main-subscription.bicep`
 - [x] Update README (and add an AGENTS.md section) documenting the deployment commands
-- [ ] Open pull request and merge to main
+- [x] Open pull request and merge to main
 
 ## 1. Bicep structure under `infrastructure/`
 
