@@ -22,3 +22,8 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# compiled bicep artifacts
+infrastructure/*.json
+!infrastructure/bicepconfig.json
+infrastructure/modules/*.json
