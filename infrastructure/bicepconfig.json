@@ -1,0 +1,19 @@
+{
+  "analyzers": {
+    "core": {
+      "verbose": false,
+      "enabled": true,
+      "rules": {
+        "no-unused-vars": {
+          "level": "warning"
+        },
+        "no-unused-existing-resources": {
+          "level": "warning"
+        },
+        "protect-commandtoexecutesecuredatas": {
+          "level": "error"
+        }
+      }
+    }
+  }
+}
