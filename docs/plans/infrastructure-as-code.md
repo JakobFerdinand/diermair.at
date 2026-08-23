@@ -43,12 +43,12 @@ Checkboxes are updated as work progresses.
 
 - [x] Create git branch `feat/infrastructure-as-code`
 - [x] Write infrastructure plan (`docs/plans/infrastructure-as-code.md`)
-- [x] Scaffold Bicep templates (`main.bicep`, optional `main-subscription.bicep`, modules, `*.bicepparam`, `bicepconfig.json`)
+- [x] Scaffold Bicep templates (`main.bicep`, modules, `*.bicepparam`, `bicepconfig.json`)
 - [x] Validate templates locally (`az bicep build` + `az deployment group what-if`)
 - [x] Write `.github/workflows/infra-deploy.yml` (what-if PR job + deploy on main)
 - [x] Manual: create service principal + OIDC federated credential scoped to RG-diermairat, add GitHub secrets (`AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_SUBSCRIPTION_ID`)
 - [x] First deploy: review what-if → apply → verify site stays live and custom domains remain intact
-- [x] Optional: create subscription cost budget via `main-subscription.bicep`
+- [x] Optional: create cost budget via `main.bicep` (resource-group scope)
 - [x] Update README (and add an AGENTS.md section) documenting the deployment commands
 - [x] Open pull request and merge to main
 
@@ -57,13 +57,10 @@ Checkboxes are updated as work progresses.
 ```
 infrastructure/
   main.bicep              # RG-scoped orchestrator (targetScope = resourceGroup)
-  main.bicepparam         # values: SWA name, location, custom domains
-  main-subscription.bicep # subscription-scoped deployment (optional cost budget)
-  main-subscription.bicepparam
+  main.bicepparam         # values: SWA name, location, custom domains, budget
   bicepconfig.json        # lint rules
   modules/
     static-sites.bicep    # SWA + custom domains (adopt in place)
-    budget.bicep          # subscription cost budget + action group (new resource)
 ```
 
 Details:
@@ -75,10 +72,11 @@ Details:
   modules — those resources do not exist in this estate.
 - There are no app settings to manage, so no Key Vault and no
   `seed-keyvault.sh` / `sync-swappsettings.sh` scripts are needed.
-- The subscription-scoped budget template mirrors alpakasoelde's pattern
-  (`Diermairat-Budget`, monthly grain, notifications at 20/80/100% via action
-  group). This creates a **new** budget — none exists today — and can be
-  deferred or dropped if not wanted.
+- The cost budget (`Diermairat-Budget`, monthly grain, notifications at 20/80/100%
+  via action group) lives in `main.bicep` at **resource-group scope**. It was
+  originally deployed subscription-scoped, but RG scope needs no extra
+  permissions, so the whole estate deploys with Contributor on `RG-diermairat`
+  only.
 
 ## 2. Secret management
 
@@ -92,14 +90,13 @@ New workflow `.github/workflows/infra-deploy.yml`:
 
 - Triggers: push to `main` with paths `infrastructure/**`, and `pull_request`
   for a what-if preview job; both also support `workflow_dispatch`.
-- Env: `RESOURCE_GROUP=RG-diermairat`, `DEPLOYMENT_LOCATION=westeurope`.
+- Env: `RESOURCE_GROUP=RG-diermairat`.
 
 Deploy identity (one-time setup):
 
 - Create a service principal for this repo.
 - Add an OIDC federated credential for `JakobFerdinand/diermair.at`.
-- Grant Contributor on `RG-diermairat` only (least privilege; add subscription
-  scope only if the budget module is adopted).
+- Grant Contributor on `RG-diermairat` only (least privilege).
 - Store `AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_SUBSCRIPTION_ID` in repo
   secrets (separate from the alpakasoelde ones).
 
@@ -109,8 +106,7 @@ Jobs:
   `az deployment group what-if` → post the diff as a PR comment (marker-based
   upsert), so infra PRs show their impact before merge.
 - **deploy** (main): `azure/login@v2` → `az bicep build` → what-if guard that
-  fails on any `Delete`/`Replace` change → `az deployment group create`;
-  optionally `az deployment sub create` for the budget.
+  fails on any `Delete`/`Replace` change → `az deployment group create`.
 
 ## 4. Rollout order (safe, no downtime)
 
@@ -125,7 +121,7 @@ Jobs:
    posted what-if comment.
 4. Merge; verify the deploy job succeeds, the site stays live at
    https://diermair.at, and both custom domains still resolve.
-5. Optionally deploy the subscription budget.
+5. Optionally deploy the cost budget.
 6. Update README with an "Infrastructure" section pointing at
    `infrastructure/` and the workflow behaviour.
 
@@ -137,8 +133,10 @@ Jobs:
 
 ## Decisions
 
-- Bicep with a single RG-scoped `main.bicep`; subscription-scoped
-  `main-subscription.bicep` reserved for the optional cost budget.
+- Bicep with a single RG-scoped `main.bicep`; the cost budget is
+  resource-group scoped so no subscription-level deployment or permissions are
+  needed (the original subscription-scoped budget template and the SP's
+  subscription-scope Contributor role were removed).
 - Adopt existing resources in place; no recreation, no downtime.
 - No Key Vault: the estate has no secrets today.
 - Existing app build-and-deploy workflow stays untouched; infra changes deploy
