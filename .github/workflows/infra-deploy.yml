@@ -23,7 +23,6 @@ permissions:
 
 env:
   RESOURCE_GROUP: RG-diermairat
-  DEPLOYMENT_LOCATION: westeurope
 
 jobs:
   what-if:
@@ -39,11 +38,10 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-      - name: Compile Bicep templates
+      - name: Compile Bicep template
         run: |
           az bicep install
           az bicep build --file infrastructure/main.bicep --stdout >/dev/null
-          az bicep build --file infrastructure/main-subscription.bicep --stdout >/dev/null
 
       - name: What-if resource group
         run: |
@@ -53,14 +51,6 @@ jobs:
             --parameters infrastructure/main.bicepparam \
             --no-pretty-print > /tmp/what-if-rg.json
 
-      - name: What-if subscription
-        run: |
-          az deployment sub what-if \
-            --location "$DEPLOYMENT_LOCATION" \
-            --template-file infrastructure/main-subscription.bicep \
-            --parameters infrastructure/main-subscription.bicepparam \
-            --no-pretty-print > /tmp/what-if-sub.json
-
       - name: Post what-if comment
         if: github.event_name == 'pull_request'
         uses: actions/github-script@v7
@@ -69,7 +59,7 @@ jobs:
             const fs = require('fs');
             const marker = '<!-- infra-what-if -->';
             const sections = [];
-            for (const file of ['/tmp/what-if-rg.json', '/tmp/what-if-sub.json']) {
+            for (const file of ['/tmp/what-if-rg.json']) {
               let rows = '_no changes_';
               try {
                 const data = JSON.parse(fs.readFileSync(file, 'utf8'));
@@ -118,11 +108,10 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-      - name: Compile Bicep templates
+      - name: Compile Bicep template
         run: |
           az bicep install
           az bicep build --file infrastructure/main.bicep --stdout >/dev/null
-          az bicep build --file infrastructure/main-subscription.bicep --stdout >/dev/null
 
       - name: Guard against destructive changes (resource group)
         run: |
@@ -141,13 +130,6 @@ jobs:
             --resource-group "$RESOURCE_GROUP" \
             --template-file infrastructure/main.bicep \
             --parameters infrastructure/main.bicepparam
-
-      - name: Deploy subscription budget
-        run: |
-          az deployment sub create \
-            --location "$DEPLOYMENT_LOCATION" \
-            --template-file infrastructure/main-subscription.bicep \
-            --parameters infrastructure/main-subscription.bicepparam
 
       - name: Set StorageConnection app setting
         run: |
