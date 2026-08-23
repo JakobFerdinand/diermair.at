@@ -15,6 +15,17 @@ param budgetNotificationEmail string
 @description('Action group notified on budget threshold breach.')
 param actionGroupName string = 'diermairat-budget-actions'
 
+@description('Name of the storage account for website analytics.')
+param storageAccountName string
+
+module storage './modules/storage.bicep' = {
+  name: 'storage'
+  params: {
+    storageAccountName: storageAccountName
+    location: location
+  }
+}
+
 module staticSites './modules/static-sites.bicep' = {
   name: 'staticSites'
   params: {
