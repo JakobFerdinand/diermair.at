@@ -5,7 +5,8 @@ Guidance for coding agents working in this repository.
 ## Project overview
 
 - Astro static site for [diermair.at](https://diermair.at); pages in `src/pages`, reusable pieces in `src/components`, content collections configured in `src/content.config.ts`.
-- Deployed to Azure Static Web App `diermairat` (RG-diermairat, westeurope, Free SKU) by the auto-generated `.github/workflows/azure-static-web-apps-gray-plant-0450feb03.yml`: `npm install && npm run build`, uploads `./dist`.
+- Deployed to Azure Static Web App `diermairat` (RG-diermairat, westeurope, Free SKU) by the auto-generated `.github/workflows/azure-static-web-apps-gray-plant-0450feb03.yml`: `pnpm install --frozen-lockfile && pnpm run build`, uploads `./dist`.
+- Use pnpm for all JavaScript dependency management (`pnpm install`, `pnpm run ...`); npm must not be used. The pinned version is declared in `package.json#packageManager`.
 - `api/`: Azure Functions managed API (C# .NET isolated); serves the `POST /api/pageview` endpoint and writes page views to Azure Table Storage (account `stdiermairat`, table `pageviews`). See `docs/plans/002-website-analytics.md`.
 - `staticwebapp.config.json` is copied into the build output and configures headers/redirects plus the managed-functions `apiRuntime` (`dotnet-isolated:9.0`) for the Static Web App.
 
