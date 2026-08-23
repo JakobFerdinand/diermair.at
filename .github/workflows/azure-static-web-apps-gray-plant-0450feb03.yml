@@ -28,11 +28,18 @@ jobs:
         with:
           dotnet-version: 9.0.x
 
-      - name: NPM Install
-        run: npm install
+      - name: Setup pnpm
+        uses: pnpm/setup@v1
+        with:
+          version: 11
+          runtime: node@24
+          install: false
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
       - name: Build Page
-        run: npm run build
+        run: pnpm run build
 
       - name: Publish API
         run: dotnet publish api/diermair-api.csproj -o dist-api
