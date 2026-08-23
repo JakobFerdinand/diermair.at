@@ -112,7 +112,7 @@ Single component, single file touched: `src/components/Gallery.astro`.
 
 ## Verification
 
-- [ ] `npm run build` passes (includes `astro check` type checking)
+- [x] `npm run build` passes (includes `astro check` type checking)
 - [ ] `npm run dev`: hero autoplays, pauses on hover/hidden-tab/offscreen
 - [ ] Arrows, dots and counter work; clicking a slide/thumb opens the
       lightbox at the right index
