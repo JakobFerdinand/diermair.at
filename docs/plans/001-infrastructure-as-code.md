@@ -42,7 +42,7 @@ resources, but gated on a what-if review first — if what-if reports a destruct
 Checkboxes are updated as work progresses.
 
 - [x] Create git branch `feat/infrastructure-as-code`
-- [x] Write infrastructure plan (`docs/plans/infrastructure-as-code.md`)
+- [x] Write infrastructure plan (`docs/plans/001-infrastructure-as-code.md`)
 - [x] Scaffold Bicep templates (`main.bicep`, modules, `*.bicepparam`, `bicepconfig.json`)
 - [x] Validate templates locally (`az bicep build` + `az deployment group what-if`)
 - [x] Write `.github/workflows/infra-deploy.yml` (what-if PR job + deploy on main)
