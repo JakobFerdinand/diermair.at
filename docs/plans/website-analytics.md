@@ -190,15 +190,15 @@ visit statistics):
 
 Checkboxes are updated as work progresses.
 
-- [ ] Decide final storage account name (`stdiermairat`) and retention (36 months)
-- [ ] Add `storage.bicep` module + `main.bicep` wiring; validate with `az bicep build` + `az deployment group what-if` (expect only `Create`)
-- [ ] Extend `infra-deploy.yml` deploy job to set the `StorageConnection` app setting
-- [ ] Scaffold `api/` (csproj, Program.cs, pageview feature, requests.http); verify `dotnet publish`
-- [ ] Add beacon script to `Layout.astro`; update `staticwebapp.config.json` (`apiRuntime`)
-- [ ] Update `azure-static-web-apps-gray-plant-0450feb03.yml` (dotnet publish + `api_location`)
-- [ ] Update `datenschutzerklaerung.astro` (pseudonymous statistics section)
-- [ ] Ignore API build artifacts; add nuget dependabot updates
-- [ ] Update `AGENTS.md` (new `api/` dir, app setting note)
+- [x] Decide final storage account name (`stdiermairat`) and retention (36 months)
+- [x] Add `storage.bicep` module + `main.bicep` wiring; validate with `az bicep build` + `az deployment group what-if` (expect only `Create`)
+- [x] Extend `infra-deploy.yml` deploy job to set the `StorageConnection` app setting
+- [x] Scaffold `api/` (csproj, Program.cs, pageview feature, requests.http); verify `dotnet publish`
+- [x] Add beacon script to `Layout.astro`; update `staticwebapp.config.json` (`apiRuntime`)
+- [x] Update `azure-static-web-apps-gray-plant-0450feb03.yml` (dotnet publish + `api_location`)
+- [x] Update `datenschutzerklaerung.astro` (pseudonymous statistics section)
+- [x] Ignore API build artifacts; add nuget dependabot updates
+- [x] Update `AGENTS.md` (new `api/` dir, app setting note)
 - [ ] Merge; deploy infrastructure; verify storage account exists
 - [ ] Deploy app; verify: beacon fires, 204 returned, rows appear in the
       `pageviews` table (`az storage table query`)
