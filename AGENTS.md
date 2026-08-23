@@ -11,11 +11,10 @@ Guidance for coding agents working in this repository.
 
 ## Infrastructure as Code
 
-- `infrastructure/`: Bicep templates that adopt the Azure estate in place (`main.bicep` declares the Static Web App `diermairat`, the storage account `stdiermairat` and custom domains `diermair.at` / `www.diermair.at`; `main-subscription.bicep` provisions the `Diermairat-Budget`). The only secret-ish value, the storage connection string, is applied as the SWA app setting `StorageConnection` by the infra workflow — never committed, no Key Vault.
+- `infrastructure/`: Bicep templates that adopt the Azure estate in place (`main.bicep` declares the Static Web App `diermairat`, the storage account `stdiermairat`, custom domains `diermair.at` / `www.diermair.at` and the resource-group scoped `Diermairat-Budget`). The only secret-ish value, the storage connection string, is applied as the SWA app setting `StorageConnection` by the infra workflow — never committed, no Key Vault.
 - Changes to `infrastructure/**` deploy automatically through `.github/workflows/infra-deploy.yml`: PRs get a what-if preview comment, pushes to `main` apply (guarded against Delete/Replace changes).
 - Validate locally before committing infra changes:
   - `az bicep build --file infrastructure/main.bicep`
-  - `az bicep build --file infrastructure/main-subscription.bicep`
   - `az deployment group what-if --resource-group RG-diermairat --template-file infrastructure/main.bicep --parameters infrastructure/main.bicepparam`
 - See `docs/plans/infrastructure-as-code.md` for the adoption plan and rollout notes.
 
