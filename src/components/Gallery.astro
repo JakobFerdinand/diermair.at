@@ -14,9 +14,17 @@ const gallery = modules.map(([, module], i) => ({
 const total = gallery.length;
 
 const FEATURED_COUNT = 8;
-const featured = Array.from({ length: FEATURED_COUNT }, (_, i) =>
-  gallery[Math.round((i * total) / FEATURED_COUNT)],
-);
+const featured = Array.from({ length: FEATURED_COUNT }, (_, i) => {
+  const { globalIndex, image } = gallery[Math.round((i * total) / FEATURED_COUNT)];
+  const scale = 1600 / Math.max(image.width, image.height);
+  return {
+    globalIndex,
+    image,
+    portrait: image.height > image.width,
+    displayWidth: Math.round(image.width * scale),
+    displayHeight: Math.round(image.height * scale),
+  };
+});
 
 const LIGHTBOX_WIDTH = 1600;
 const lightboxData = await Promise.all(
@@ -34,13 +42,20 @@ const lightboxData = await Promise.all(
 
   <div class="hero" data-hero aria-roledescription="carousel" aria-label="Slideshow meiner Arbeit">
     <div class="hero-slides">
-      {featured.map(({ globalIndex, image }, i) => (
+      {featured.map(({ globalIndex, image, portrait, displayWidth, displayHeight }, i) => (
         <div
-          class:list={['hero-slide', { active: i === 0 }]}
+          class:list={['hero-slide', { active: i === 0 }, { 'is-portrait': portrait }]}
           aria-roledescription="slide"
           aria-label={`Bild ${i + 1} von ${featured.length}`}
           aria-hidden={i === 0 ? undefined : 'true'}
         >
+          {portrait && (
+            <div
+              class="hero-backdrop"
+              style={`background-image: url('${image.src}')`}
+              aria-hidden="true"
+            />
+          )}
           <button
             type="button"
             class="hero-slide-button"
@@ -50,8 +65,8 @@ const lightboxData = await Promise.all(
             <Image
               src={image}
               alt={`Galeriebild ${globalIndex + 1}`}
-              width={1600}
-              height={900}
+              width={displayWidth}
+              height={displayHeight}
               widths={[640, 1024, 1600]}
               sizes="(max-width: 639px) 100vw, 800px"
               quality="mid"
@@ -103,7 +118,7 @@ const lightboxData = await Promise.all(
             <Image
               src={image}
               alt=""
-              width={200}
+              width={Math.round((140 * image.width) / image.height)}
               height={140}
               quality="mid"
               loading="lazy"
@@ -176,6 +191,7 @@ const lightboxData = await Promise.all(
   }
 
   .hero-slide-button {
+    position: relative;
     display: block;
     width: 100%;
     height: 100%;
@@ -190,6 +206,18 @@ const lightboxData = await Promise.all(
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+
+  .hero-backdrop {
+    position: absolute;
+    inset: -1.5rem;
+    background-size: cover;
+    background-position: center;
+    filter: blur(1.5rem);
+  }
+
+  .hero-slide.is-portrait .hero-image {
+    object-fit: contain;
   }
 
   .hero-arrow {
