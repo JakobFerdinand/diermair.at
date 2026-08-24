@@ -41,6 +41,11 @@ updates:
       npm-all:
         patterns:
           - "*"
+    ignore:
+      # Keep website pinned to TypeScript 6 until astro check supports newer majors
+      - dependency-name: "typescript"
+        versions:
+          - ">=7"
 
   - package-ecosystem: "nuget"
     directory: "/api"
