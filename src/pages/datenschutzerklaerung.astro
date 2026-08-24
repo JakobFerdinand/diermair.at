@@ -14,13 +14,13 @@ import Layout from '../layouts/Layout.astro';
            <strong>E-Mail:</strong> <a href="mailto:diermair.waldbewirtschaftung@gmail.com">diermair.waldbewirtschaftung@gmail.com</a></p>
 
         <h2>Erhebung und Speicherung personenbezogener Daten</h2>
-        <h3>Keine Cookies & kein Local Storage</h3>
-        <p>Diese Website verwendet keine Cookies und keinen Local Storage. Es findet kein Tracking durch Drittanbieter-Tools statt.</p>
+        <h3>Keine Cookies – lokale Speicherung zufälliger Kennungen</h3>
+        <p>Diese Website verwendet keine Cookies. Im lokalen Speicher des Browsers (Local Storage und Session Storage) werden jedoch zwei zufällig generierte Kennungen abgelegt: eine Besucher-Kennung („lt-visitor“), die über Besuche hinweg bestehen bleibt, sowie eine situngsbezogene Sitzungs-Kennung („lt-session“) pro Browser-Sitzung bzw. Tab. Beide Kennungen werden nicht mit einer Person, einer IP-Adresse oder sonstigen personenbezogenen Daten verknüpft. Es findet kein Tracking durch Drittanbieter-Tools statt.</p>
         <h3>Pseudonyme Besuchsstatistik</h3>
         <p>Beim Aufruf dieser Website wird eine pseudonyme Besuchsstatistik erfasst. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der Auswertung und Verbesserung unseres Webangebots).</p>
-        <p>Erfasst werden ausschließlich der aufgerufene Seitenpfad, die Herkunfts-Domain des Referrers (nur die Domain, niemals die vollständige URL) sowie die Bildschirmbreite des verwendeten Geräts.</p>
-        <p>Es werden keine Cookies, keine IP-Adressen, keine Nutzer-IDs und kein User-Agent gespeichert. Eine Identifizierung einzelner Besucher ist nicht möglich.</p>
-        <p>Die Daten werden in Azure Table Storage in der EU (Region Westeuropa) gespeichert und nach 36 Monaten automatisch gelöscht. Da ausschließlich pseudonyme, einwilligungsfreie Daten verarbeitet werden, ist kein Opt-out erforderlich.</p>
+        <p>Erfasst werden ausschließlich der aufgerufene Seitenpfad, die Herkunfts-Domain des Referrers (nur die Domain, niemals die vollständige URL), die Bildschirmbreite des verwendeten Geräts, eine zufällig generierte Besucher-Kennung, eine situngsbezogene Sitzungs-Kennung sowie die Navigationsart des Seitenaufrufs (normaler Aufruf, Reload oder Vor-/Rückwärts-Navigation).</p>
+        <p>Es werden keine Cookies, keine IP-Adressen und kein User-Agent gespeichert. Anhand der zufällig generierten Kennungen kann lediglich derselbe Browser bei wiederholten Besuchen wiedererkannt werden (Pseudonym). Ein Rückschluss auf eine bestimmte Person ist nicht möglich, da die Kennungen rein zufällig erzeugt und niemals mit der IP-Adresse, dem User-Agent oder anderen personenbezogenen Daten kombiniert werden.</p>
+        <p>Die Daten werden in Azure Table Storage in der EU (Region Westeuropa) gespeichert und nach 36 Monaten automatisch gelöscht. Wer keine Speicherung der Kennungen wünscht, kann dies über die Einstellungen des Browsers verhindern oder die gespeicherten Daten jederzeit löschen (etwa über den privaten Surfmodus oder das Löschen der Websitedaten); die Besuchsstatistik erfolgt dann ohne die Kennungen.</p>
         <h3>Server- und Logdaten</h3>
         <p>Über die oben beschriebene Besuchsstatistik hinaus werden keine Server-Logs oder sonstigen Zugriffsprotokolle seitens des Website-Betreibers erhoben oder ausgewertet.</p>
 
@@ -31,7 +31,7 @@ import Layout from '../layouts/Layout.astro';
         <p>Eine Weitergabe von Daten an Dritte findet nicht statt. Hosting sowie Speicherung der Besuchsstatistik erfolgen bei Microsoft Azure in Westeuropa (siehe oben).</p>
 
         <h2>Betroffenenrechte</h2>
-        <p>Da auf dieser Website ausschließlich pseudonyme Daten verarbeitet werden, ist keine Identifizierung einzelner Besucher möglich. Unabhängig davon stehen Ihnen grundsätzlich folgende Rechte zu, sollten Sie Ihre Daten von uns einfordern wollen:</p>
+        <p>Da auf dieser Website ausschließlich pseudonyme Daten verarbeitet werden, können wiederkehrende Besucher nur pseudonym über ihre Kennung wiedererkannt werden; eine Identifizierung bestimmter Personen ist nicht möglich. Unabhängig davon stehen Ihnen grundsätzlich folgende Rechte zu, sollten Sie Ihre Daten von uns einfordern wollen:</p>
         <ul>
             <li>Recht auf Auskunft</li>
             <li>Recht auf Berichtigung</li>
@@ -43,6 +43,6 @@ import Layout from '../layouts/Layout.astro';
         <p>Zur Ausübung Ihrer Rechte oder bei Fragen zum Datenschutz kontaktieren Sie bitte den Verantwortlichen (siehe oben).</p>
 
         <h2>Änderungen dieser Datenschutzerklärung</h2>
-        <p>Diese Datenschutzerklärung ist aktuell gültig und datiert auf den 23. August 2026. Sollten sich an der Datenerhebung, am Hosting oder an den rechtlichen Vorgaben Änderungen ergeben, wird diese Erklärung entsprechend angepasst.</p>
+        <p>Diese Datenschutzerklärung ist aktuell gültig und datiert auf den 24. August 2026. Sollten sich an der Datenerhebung, am Hosting oder an den rechtlichen Vorgaben Änderungen ergeben, wird diese Erklärung entsprechend angepasst.</p>
     </div>
 </Layout>
