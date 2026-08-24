@@ -23,3 +23,26 @@ Content-Type: application/json
   "referrerHost": "google.at",
   "viewportWidth": 1920
 }
+
+### Full payload with session and visitor identifiers (expect 204)
+POST http://localhost:7071/api/pageview
+Content-Type: application/json
+
+{
+  "path": "/",
+  "referrerHost": "google.at",
+  "viewportWidth": 1920,
+  "sessionId": "3f2b8c4a-9d1e-4f6b-a7c8-5e0d1b2f3a4c",
+  "visitorId": "7c9e6679-7425-40de-944b-e07fc1f90ae7",
+  "navigationType": "reload"
+}
+
+### Minimal legacy-shaped payload (expect 204)
+POST http://localhost:7071/api/pageview
+Content-Type: application/json
+
+{
+  "path": "/",
+  "referrerHost": "google.at",
+  "viewportWidth": 1920
+}
