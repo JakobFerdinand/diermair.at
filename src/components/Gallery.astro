@@ -1,23 +1,161 @@
 ---
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
+import { ChevronLeft, ChevronRight, X } from '@lucide/astro';
 import type { ImageMetadata } from 'astro';
 
-// Use import.meta.glob to import all images from the gallery directory
-const allGalleryImageModules = import.meta.glob<{ default: ImageMetadata }>('../images/gallerie/*.jpeg', { eager: true });
+const modules = Object.entries(
+  import.meta.glob<{ default: ImageMetadata }>('../images/gallerie/*.jpeg', { eager: true }),
+).sort(([a], [b]) => a.localeCompare(b));
 
-const galleryImages = Object.values(allGalleryImageModules).map((module) => ({
-  src: module.default, // The actual image data is in the default export
+const gallery = modules.map(([, module], i) => ({
+  globalIndex: i,
+  image: module.default,
 }));
+const total = gallery.length;
 
-// Duplicate the images so the animation can loop seamlessly
-const scrollingImages = [...galleryImages, ...galleryImages];
+const FEATURED_COUNT = 8;
+const featured = Array.from({ length: FEATURED_COUNT }, (_, i) => {
+  const { globalIndex, image } = gallery[Math.round((i * total) / FEATURED_COUNT)];
+  const scale = 1600 / Math.max(image.width, image.height);
+  return {
+    globalIndex,
+    image,
+    portrait: image.height > image.width,
+    displayWidth: Math.round(image.width * scale),
+    displayHeight: Math.round(image.height * scale),
+  };
+});
+
+const LIGHTBOX_WIDTH = 1600;
+const lightboxData = await Promise.all(
+  gallery.map(async ({ image }, i) => ({
+    src: (await getImage({ src: image, width: LIGHTBOX_WIDTH })).src,
+    width: LIGHTBOX_WIDTH,
+    height: Math.round((LIGHTBOX_WIDTH * image.height) / image.width),
+    alt: `Galeriebild ${i + 1}`,
+  })),
+);
 ---
+
+<section id="gallery">
+  <h2 class="gallery-title">Einblicke in meine Arbeit</h2>
+
+  <div class="hero" data-hero aria-roledescription="carousel" aria-label="Slideshow meiner Arbeit">
+    <div class="hero-slides">
+      {featured.map(({ globalIndex, image, portrait, displayWidth, displayHeight }, i) => (
+        <div
+          class:list={['hero-slide', { active: i === 0 }, { 'is-portrait': portrait }]}
+          aria-roledescription="slide"
+          aria-label={`Bild ${i + 1} von ${featured.length}`}
+          aria-hidden={i === 0 ? undefined : 'true'}
+        >
+          {portrait && (
+            <div
+              class="hero-backdrop"
+              style={`background-image: url('${image.src}')`}
+              aria-hidden="true"
+            />
+          )}
+          <button
+            type="button"
+            class="hero-slide-button"
+            data-hero-index={i}
+            aria-label={`Bild ${globalIndex + 1} vergrößern`}
+          >
+            <Image
+              src={image}
+              alt={`Galeriebild ${globalIndex + 1}`}
+              width={displayWidth}
+              height={displayHeight}
+              widths={[640, 1024, 1600]}
+              sizes="(max-width: 639px) 100vw, 800px"
+              quality="mid"
+              loading={i === 0 ? 'eager' : 'lazy'}
+              fetchpriority={i === 0 ? 'high' : undefined}
+              decoding="async"
+              class="hero-image"
+            />
+          </button>
+        </div>
+      ))}
+    </div>
+
+    <button type="button" class="hero-arrow prev" data-hero-prev aria-label="Vorheriges Bild">
+      <ChevronLeft size={26} />
+    </button>
+    <button type="button" class="hero-arrow next" data-hero-next aria-label="Nächstes Bild">
+      <ChevronRight size={26} />
+    </button>
+
+    <div class="hero-dots" role="group" aria-label="Slideshow Navigation">
+      {featured.map((_, i) => (
+        <button
+          type="button"
+          class:list={['hero-dot', { active: i === 0 }]}
+          data-hero-dot={i}
+          aria-label={`Zu Bild ${i + 1}`}
+          aria-current={i === 0 ? 'true' : undefined}
+        />
+      ))}
+    </div>
+
+    <p class="hero-counter" data-hero-counter aria-live="polite">1 / {featured.length}</p>
+  </div>
+
+  <div class="strip" data-strip>
+    <div class="strip-track">
+      {[...gallery, ...gallery].map(({ globalIndex, image }, i) => {
+        const duplicate = i >= total;
+        return (
+          <button
+            type="button"
+            class="strip-item"
+            data-strip-index={globalIndex}
+            aria-label={`Bild ${globalIndex + 1} vergrößern`}
+            aria-hidden={duplicate ? 'true' : undefined}
+            tabindex={duplicate ? -1 : undefined}
+          >
+            <Image
+              src={image}
+              alt=""
+              width={Math.round((140 * image.width) / image.height)}
+              height={140}
+              quality="mid"
+              loading="lazy"
+              decoding="async"
+              class="strip-image"
+            />
+          </button>
+        );
+      })}
+    </div>
+  </div>
+
+  <dialog
+    class="lightbox"
+    data-lightbox
+    aria-label="Bildansicht"
+    data-images={JSON.stringify(lightboxData)}
+  >
+    <figure class="lightbox-figure">
+      <img class="lightbox-image" data-lightbox-image alt="" />
+      <figcaption class="lightbox-counter" data-lightbox-counter aria-live="polite"></figcaption>
+    </figure>
+    <button type="button" class="lightbox-close" data-lightbox-close aria-label="Schließen">
+      <X size={24} />
+    </button>
+    <button type="button" class="lightbox-arrow prev" data-lightbox-prev aria-label="Vorheriges Bild">
+      <ChevronLeft size={28} />
+    </button>
+    <button type="button" class="lightbox-arrow next" data-lightbox-next aria-label="Nächstes Bild">
+      <ChevronRight size={28} />
+    </button>
+  </dialog>
+</section>
+
 <style>
   #gallery {
-    overflow: hidden;
     padding: 4rem 0;
-    margin-left: -1rem;
-    margin-right: -1rem;
   }
 
   .gallery-title {
@@ -26,42 +164,486 @@ const scrollingImages = [...galleryImages, ...galleryImages];
     margin-bottom: 2rem;
   }
 
-  .gallery-images {
-    display: flex;
-    gap: 2rem;
-    width: max-content;
-    animation: gallery-scroll 180s linear infinite;
-  }
-
-  .gallery-image-item {
-    height: 12rem;
-    width: auto;
-    max-width: 280px;
-    flex-shrink: 0;
-    object-fit: cover;
+  .hero {
+    position: relative;
+    aspect-ratio: 16 / 9;
     border-radius: 1rem;
+    overflow: hidden;
+    background: #fff;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
 
-  @keyframes gallery-scroll {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
+  .hero-slides,
+  .hero-slide {
+    position: absolute;
+    inset: 0;
+  }
+
+  .hero-slide {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+  }
+
+  .hero-slide.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .hero-slide-button {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: zoom-in;
+  }
+
+  .hero-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hero-backdrop {
+    position: absolute;
+    inset: -1.5rem;
+    background-size: cover;
+    background-position: center;
+    filter: blur(1.5rem);
+  }
+
+  .hero-slide.is-portrait .hero-image {
+    object-fit: contain;
+  }
+
+  .hero-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border: none;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.92);
+    color: var(--green-color);
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    transition: transform 0.15s ease, background-color 0.15s ease;
+  }
+
+  .hero-arrow:hover {
+    background: #fff;
+    transform: translateY(-50%) scale(1.06);
+  }
+
+  .hero-arrow.prev {
+    left: 1rem;
+  }
+
+  .hero-arrow.next {
+    right: 1rem;
+  }
+
+  .hero-dots {
+    position: absolute;
+    bottom: 0.9rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .hero-dot {
+    width: 0.65rem;
+    height: 0.65rem;
+    padding: 0;
+    border: none;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.55);
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .hero-dot.active {
+    background: #fff;
+    transform: scale(1.25);
+  }
+
+  .hero-counter {
+    position: absolute;
+    bottom: 0.9rem;
+    right: 1rem;
+    z-index: 2;
+    margin: 0;
+    padding: 0.15rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.45);
+  }
+
+  .strip {
+    overflow: hidden;
+    margin-inline: -1rem;
+    padding-block: 0.5rem;
+  }
+
+  .strip-track {
+    display: flex;
+    width: max-content;
+    animation: strip-scroll 240s linear infinite;
+  }
+
+  .strip-item {
+    flex-shrink: 0;
+    margin-right: 1.25rem;
+    padding: 0;
+    border: none;
+    border-radius: 1rem;
+    background: none;
+    overflow: hidden;
+    cursor: zoom-in;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .strip-image {
+    display: block;
+    height: 10rem;
+    width: auto;
+    transition: transform 0.3s ease;
+  }
+
+  .strip-item:hover .strip-image {
+    transform: scale(1.04);
+  }
+
+  .strip:hover .strip-track,
+  .strip:focus-within .strip-track {
+    animation-play-state: paused;
+  }
+
+  @keyframes strip-scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  .lightbox {
+    border: none;
+    padding: 0;
+    background: transparent;
+    border-radius: 1rem;
+    max-width: min(94vw, 1600px);
+    overscroll-behavior: contain;
+  }
+
+  .lightbox::backdrop {
+    background: rgba(0, 0, 0, 0.78);
+    backdrop-filter: blur(3px);
+  }
+
+  .lightbox-figure {
+    position: relative;
+    margin: 0;
+  }
+
+  .lightbox-image {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: min(92vw, 1500px);
+    max-height: 82vh;
+    border-radius: 1rem;
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5);
+    opacity: 1;
+    transition: opacity 0.25s ease;
+  }
+
+  .lightbox-image.is-loading {
+    opacity: 0.25;
+  }
+
+  .lightbox-counter {
+    position: absolute;
+    left: 1rem;
+    bottom: 1rem;
+    margin: 0;
+    padding: 0.2rem 0.7rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  .lightbox-close,
+  .lightbox-arrow {
+    position: absolute;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.92);
+    color: var(--green-color);
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+  }
+
+  .lightbox-close:hover,
+  .lightbox-arrow:hover {
+    background: #fff;
+  }
+
+  .lightbox-close {
+    top: 0.75rem;
+    right: 0.75rem;
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .lightbox-arrow {
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+
+  .lightbox-arrow.prev {
+    left: 0.75rem;
+  }
+
+  .lightbox-arrow.next {
+    right: 0.75rem;
+  }
+
+  :global(html.gallery-lightbox-open) {
+    overflow: hidden;
+  }
+
+  button:focus-visible {
+    outline: 3px solid var(--green-color);
+    outline-offset: 2px;
+  }
+
+  .hero-dot:focus-visible,
+  .lightbox-counter:focus-visible {
+    outline-color: #fff;
+  }
+
+  @media (max-width: 639px) {
+    .hero {
+      aspect-ratio: 4 / 3;
+    }
+
+    .hero-arrow {
+      width: 2.25rem;
+      height: 2.25rem;
+    }
+
+    .strip-image {
+      height: 7rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .strip-track {
+      animation: none;
+    }
+
+    .hero-slide,
+    .lightbox-image,
+    .strip-image {
+      transition: none;
+    }
   }
 </style>
 
-<section id="gallery">
-  <h2 class="gallery-title">Einblicke in meine Arbeit</h2>
-  <div class="gallery-images">
-    {scrollingImages.map((image, index) => (
-      <Image
-        src={image.src}
-        alt={`Galeriebild ${index + 1}`}
-        width={280}
-        height={192}
-        quality="mid"
-        class="gallery-image-item"
-        loading={index < galleryImages.length ? "eager" : "lazy"}
-      />
-    ))}
-  </div>
-</section>
+<script>
+  const AUTOPLAY_INTERVAL = 5000;
+  const SWIPE_THRESHOLD = 50;
+
+  interface LightboxEntry {
+    src: string;
+    width: number;
+    height: number;
+    alt: string;
+  }
+
+  function initGallery(): void {
+    const section = document.getElementById('gallery');
+    const hero = section?.querySelector<HTMLElement>('[data-hero]');
+    const strip = section?.querySelector<HTMLElement>('[data-strip]');
+    const lightbox = section?.querySelector<HTMLDialogElement>('[data-lightbox]');
+
+    if (!section || !hero || !strip || !lightbox || lightbox.dataset.images == null) return;
+
+    let lightboxEntries: LightboxEntry[] = [];
+    try {
+      lightboxEntries = JSON.parse(lightbox.dataset.images) as LightboxEntry[];
+    } catch {
+      return;
+    }
+    if (!lightboxEntries.length) return;
+
+    const slides = [...hero.querySelectorAll<HTMLElement>('.hero-slide')];
+    const dots = [...hero.querySelectorAll<HTMLButtonElement>('[data-hero-dot]')];
+    const heroCounter = hero.querySelector<HTMLElement>('[data-hero-counter]');
+    const lightboxImage = lightbox.querySelector<HTMLImageElement>('[data-lightbox-image]');
+    const lightboxCounter = lightbox.querySelector<HTMLElement>('[data-lightbox-counter]');
+    if (!slides.length || !dots.length || !heroCounter || !lightboxImage || !lightboxCounter) return;
+
+    let heroIndex = 0;
+    let boxIndex = 0;
+    let lightboxOpen = false;
+    let hovered = false;
+    let focusedWithin = false;
+    let offscreen = true;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const showHeroSlide = (index: number): void => {
+      heroIndex = (index + slides.length) % slides.length;
+      slides.forEach((slide, i) => {
+        const active = i === heroIndex;
+        slide.classList.toggle('active', active);
+        if (active) {
+          slide.removeAttribute('aria-hidden');
+        } else {
+          slide.setAttribute('aria-hidden', 'true');
+        }
+      });
+      dots.forEach((dot, i) => {
+        const active = i === heroIndex;
+        dot.classList.toggle('active', active);
+        if (active) {
+          dot.setAttribute('aria-current', 'true');
+        } else {
+          dot.removeAttribute('aria-current');
+        }
+      });
+      heroCounter.textContent = `${heroIndex + 1} / ${slides.length}`;
+    };
+
+    setInterval(() => {
+      if (reducedMotion || hovered || focusedWithin || offscreen || document.hidden || lightboxOpen) {
+        return;
+      }
+      showHeroSlide(heroIndex + 1);
+    }, AUTOPLAY_INTERVAL);
+
+    hero.addEventListener('mouseenter', () => {
+      hovered = true;
+    });
+    hero.addEventListener('mouseleave', () => {
+      hovered = false;
+    });
+    hero.addEventListener('focusin', () => {
+      focusedWithin = true;
+    });
+    hero.addEventListener('focusout', () => {
+      focusedWithin = false;
+    });
+    new IntersectionObserver(([entry]) => {
+      offscreen = !(entry?.isIntersecting ?? false);
+    }).observe(hero);
+
+    hero
+      .querySelector<HTMLButtonElement>('[data-hero-prev]')
+      ?.addEventListener('click', () => showHeroSlide(heroIndex - 1));
+    hero
+      .querySelector<HTMLButtonElement>('[data-hero-next]')
+      ?.addEventListener('click', () => showHeroSlide(heroIndex + 1));
+    dots.forEach((dot, i) => dot.addEventListener('click', () => showHeroSlide(i)));
+    hero.querySelectorAll<HTMLButtonElement>('[data-hero-index]').forEach((button) => {
+      button.addEventListener('click', () => {
+        openLightbox(Number(button.dataset.heroIndex));
+      });
+    });
+
+    const updateLightbox = (index: number): void => {
+      boxIndex = (index + lightboxEntries.length) % lightboxEntries.length;
+      const entry = lightboxEntries[boxIndex] as LightboxEntry | undefined;
+      if (!entry) return;
+      lightboxImage.classList.add('is-loading');
+      lightboxImage.onload = () => lightboxImage.classList.remove('is-loading');
+      lightboxImage.src = entry.src;
+      lightboxImage.alt = entry.alt;
+      lightboxImage.width = entry.width;
+      lightboxImage.height = entry.height;
+      lightboxCounter.textContent = `${boxIndex + 1} / ${lightboxEntries.length}`;
+
+      const neighbor = lightboxEntries[(boxIndex + 1) % lightboxEntries.length];
+      if (neighbor) new Image().src = neighbor.src;
+    };
+
+    const openLightbox = (index: number): void => {
+      if (!Number.isInteger(index) || index < 0 || index >= lightboxEntries.length) return;
+      updateLightbox(index);
+      lightbox.showModal();
+      lightboxOpen = true;
+      document.documentElement.classList.add('gallery-lightbox-open');
+    };
+
+    lightbox.addEventListener('close', () => {
+      lightboxOpen = false;
+      document.documentElement.classList.remove('gallery-lightbox-open');
+    });
+    lightbox.addEventListener('click', (event) => {
+      if (event.target === lightbox) lightbox.close();
+    });
+    lightbox.querySelector<HTMLButtonElement>('[data-lightbox-close]')
+      ?.addEventListener('click', () => lightbox.close());
+    lightbox.querySelector<HTMLButtonElement>('[data-lightbox-prev]')
+      ?.addEventListener('click', () => updateLightbox(boxIndex - 1));
+    lightbox.querySelector<HTMLButtonElement>('[data-lightbox-next]')
+      ?.addEventListener('click', () => updateLightbox(boxIndex + 1));
+    lightbox.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowRight') {
+        updateLightbox(boxIndex + 1);
+      } else if (event.key === 'ArrowLeft') {
+        updateLightbox(boxIndex - 1);
+      }
+    });
+
+    let pointerStart: { x: number; y: number } | null = null;
+    lightbox.addEventListener('pointerdown', (event) => {
+      pointerStart = { x: event.clientX, y: event.clientY };
+    });
+    lightbox.addEventListener('pointerup', (event) => {
+      if (!pointerStart) return;
+      const dx = event.clientX - pointerStart.x;
+      const dy = event.clientY - pointerStart.y;
+      pointerStart = null;
+      if (Math.abs(dx) > SWIPE_THRESHOLD && Math.abs(dx) > Math.abs(dy)) {
+        if (dx > 0) {
+          updateLightbox(boxIndex - 1);
+        } else {
+          updateLightbox(boxIndex + 1);
+        }
+      }
+    });
+
+    strip.addEventListener('click', (event) => {
+      const item = (event.target as HTMLElement).closest<HTMLElement>('[data-strip-index]');
+      if (item?.dataset.stripIndex != null) {
+        openLightbox(Number(item.dataset.stripIndex));
+      }
+    });
+
+    showHeroSlide(0);
+  }
+
+  initGallery();
+</script>
