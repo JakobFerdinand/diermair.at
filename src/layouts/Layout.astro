@@ -94,8 +94,59 @@ const { title } = Astro.props;
                 <Navbar />
                 <script is:inline>
                         window.addEventListener('load', () => {
+                                const productionHosts = ['diermair.at', 'www.diermair.at'];
+                                if (!productionHosts.includes(location.hostname)) {
+                                        return;
+                                }
                                 if (!('sendBeacon' in navigator)) {
                                         return;
+                                }
+                                let path = location.pathname;
+                                if (path.length > 1 && path.endsWith('/')) {
+                                        path = path.slice(0, -1);
+                                }
+                                const randomId = () => {
+                                        if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+                                                return crypto.randomUUID();
+                                        }
+                                        if (typeof crypto === 'undefined' || typeof crypto.getRandomValues !== 'function') {
+                                                return undefined;
+                                        }
+                                        const template = '10000000-1000-4000-8000-100000000000';
+                                        return template.replace(/[018]/g, (c) =>
+                                                (c ^ (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))).toString(16)
+                                        );
+                                };
+                                let sessionId;
+                                try {
+                                        let stored = sessionStorage.getItem('lt-session');
+                                        if (!stored) {
+                                                stored = randomId();
+                                                if (stored) {
+                                                        sessionStorage.setItem('lt-session', stored);
+                                                }
+                                        }
+                                        sessionId = stored;
+                                } catch {
+                                        sessionId = undefined;
+                                }
+                                let visitorId;
+                                try {
+                                        let stored = localStorage.getItem('lt-visitor');
+                                        if (!stored) {
+                                                stored = randomId();
+                                                if (stored) {
+                                                        localStorage.setItem('lt-visitor', stored);
+                                                }
+                                        }
+                                        visitorId = stored;
+                                } catch {
+                                        visitorId = undefined;
+                                }
+                                let navigationType;
+                                const navEntry = performance.getEntriesByType?.('navigation')?.[0];
+                                if (navEntry && ['navigate', 'reload', 'back_forward'].includes(navEntry.type)) {
+                                        navigationType = navEntry.type;
                                 }
                                 let referrerHost = '';
                                 try {
@@ -104,10 +155,13 @@ const { title } = Astro.props;
                                         referrerHost = '';
                                 }
                                 const payload = {
-                                        path: location.pathname,
+                                        path,
                                         referrerHost,
                                         viewportWidth: screen.width,
                                 };
+                                if (sessionId) payload.sessionId = sessionId;
+                                if (visitorId) payload.visitorId = visitorId;
+                                if (navigationType) payload.navigationType = navigationType;
                                 navigator.sendBeacon(
                                         '/api/pageview',
                                         new Blob([JSON.stringify(payload)], { type: 'application/json' })
