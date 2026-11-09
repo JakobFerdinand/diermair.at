@@ -10,11 +10,11 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@lucide/astro": "1.57.0",
-    "astro": "^7.4.0"
+    "@lucide/astro": "1.61.0",
+    "astro": "^7.4.2"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.10",
+    "@astrojs/check": "^0.9.12",
     "sharp": "^0.35.5",
     "typescript": "^6.0.3"
   }
